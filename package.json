@@ -1,0 +1,27 @@
+{
+  "private": "true",
+  "type": "module",
+  "name": "ack",
+  "version": "0.0.1",
+  "description": "Add's Creative Kit, an object oriented abstraction to provide better control over SVGs.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "coverage": "nyc jasmine-browser-runner runSpecs",
+    "test": "jasmine-browser-runner serve",
+    "lint": "semistandard --env jasmine",
+    "format": "semistandard --fix"
+  },
+  "keywords": [],
+  "author": "Add00",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "jasmine-browser-runner": "^2.3.0",
+    "jasmine-core": "^5.1.1",
+    "nyc": "^15.1.0",
+    "semistandard": "^17.0.0"
+  }
+}
