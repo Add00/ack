@@ -1,10 +1,6 @@
 import { TextContent } from './TextContent.js';
 
 export class TextPositioning extends TextContent {
-  constructor (element, fontStyle) {
-    super(element, fontStyle);
-  }
-
   // Accessors
 
   setX (x) {

@@ -4,15 +4,6 @@ import { Geometry } from './Geometry.js';
  * @extends {Geometry}
  */
 export class Poly extends Geometry {
-  /**
-     * Create a new Poly instance.
-     * @constructor
-     * @param {Geometry} shape - .
-     */
-  constructor (shape) {
-    super(shape);
-  }
-
   // Accessors
 
   /**

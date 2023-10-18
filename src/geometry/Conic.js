@@ -1,10 +1,6 @@
 import { Geometry } from './Geometry.js';
 
 export class Conic extends Geometry {
-  constructor (shape) {
-    super(shape);
-  }
-
   setX (x) {
     super._set('cx', x);
 

@@ -1,10 +1,6 @@
 import { Element } from '../Element.js';
 
 export class Gradient extends Element {
-  constructor (element) {
-    super(element);
-  }
-
   setHref (href) {
     super._set('href', href);
 

@@ -4,10 +4,6 @@ import { StrokeStyle } from '../styles/StrokeStyle.js';
 import { PointerEvents } from '../styles/PointerEvents.js';
 
 export class Geometry extends Graphic {
-  constructor (shape) {
-    super(shape);
-  }
-
   // Accessors
 
   setStrokeStyle (strokeStyle) {
