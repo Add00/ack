@@ -1,4 +1,4 @@
-import { Canvas } from '../../src/Canvas.js';
+import { Canvas } from '../../import/general.js';
 import { Title } from '../../import/text.js';
 import { Circle } from '../../import/geometry.js';
 import { Vector3 } from '../../import/containers.js';

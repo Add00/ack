@@ -1,4 +1,4 @@
-import { Canvas } from '../../svg/Canvas.js';
+import { Canvas } from '../../import/general.js';
 import { Polyline } from '../../import/geometry.js';
 
 const svg = document.getElementById('graph');
