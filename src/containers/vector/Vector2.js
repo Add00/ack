@@ -1,3 +1,5 @@
+/** @namespace vector */
+
 /**
  * Represents a 2D vector with x and y components.
  */

@@ -7,12 +7,14 @@
   "main": "index.js",
   "directories": {
     "example": "examples",
-    "test": "spec"
+    "test": "spec",
+    "doc": "docs"
   },
   "scripts": {
     "coverage": "nyc jasmine-browser-runner runSpecs",
     "test": "jasmine-browser-runner serve",
     "lint": "semistandard --env jasmine",
+    "document": "jsdoc -r -d docs/ src",
     "format": "semistandard --fix"
   },
   "keywords": [],
@@ -21,6 +23,7 @@
   "devDependencies": {
     "jasmine-browser-runner": "^2.3.0",
     "jasmine-core": "^5.1.1",
+    "jsdoc": "^4.0.2",
     "nyc": "^15.1.0",
     "semistandard": "^17.0.0"
   }

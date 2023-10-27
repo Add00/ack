@@ -1,7 +1,7 @@
 import { Geometry } from '../src/geometry/Geometry.js';
 
 /**
- * Represents an SVG element that opperates as an OOP interface.
+ * Represents an SVG element that operates as an OOP interface.
  */
 export class Canvas extends Geometry {
   static build (svg) {
@@ -17,7 +17,7 @@ export class Canvas extends Geometry {
      * @type {number[]}
      * @private
      */
-  #viewBox;
+  #viewBox = new Array(4);
 
   /**
      * Updates the viewBox property of the canvas.

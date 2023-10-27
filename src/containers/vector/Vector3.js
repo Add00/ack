@@ -1,3 +1,5 @@
+/** @namespace vector */
+
 import { Vector2 } from './Vector2.js';
 
 export class Vector3 extends Vector2 {

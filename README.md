@@ -11,3 +11,6 @@ Add's Creative Kit, an object oriented abstraction to provide better control ove
 - Spec
   - Vector2
   - Vector3
+- Examples
+  - calculator
+  - generation

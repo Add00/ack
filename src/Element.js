@@ -1,29 +1,29 @@
 export class Element {
   /**
-     * A private map to store the counts of different tag names.
-     * @type {Map<string, number>}
-     * @private
-     */
+   * A private map to store the counts of different tag names.
+   * @type {Map<string, number>}
+   * @private
+   */
   static #tags = new Map();
 
   /**
-     * A private counter to generate unique tabindex values.
-     * @type {number}
-     * @private
-     */
+   * A private counter to generate unique tabindex values.
+   * @type {number}
+   * @private
+   */
   static #count = 0;
 
   /**
-     * The underlying SVG element.
-     * @type {SVGElement}
-     * @private
-     */
+   * The underlying SVG element.
+   * @type {SVGElement}
+   * @private
+   */
   #element;
 
   /**
-     * Creates a new Element instance.
-     * @param {SVGElement} element - The underlying SVG element to wrap.
-     */
+   * Creates a new Element instance.
+   * @param {SVGElement} element - The underlying SVG element to wrap.
+   */
   constructor (element) {
     this.#element = element;
 
@@ -123,59 +123,67 @@ export class Element {
   // Accessors
 
   /**
-     * Get a property value from the underlying SVG element.
-     * @protected
-     * @param {string} property - The name of the property to retrieve.
-     * @returns {string|null} - The value of the property.
-     */
+   * Get a property value from the underlying SVG element.
+   * @protected
+   * @param {string} property - The name of the property to retrieve.
+   * @returns {string|null} - The value of the property.
+   */
   _get (property) {
     return this.Shape().getAttribute(property);
   }
 
   /**
-     * Get a property value from the underlying SVG element and parse it as a number.
-     * @protected
-     * @param {string} property - The name of the property to retrieve and parse.
-     * @returns {number} - The parsed numeric value.
-     */
+   * Get a property value from the underlying SVG element and parse it as a number.
+   * @protected
+   * @param {string} property - The name of the property to retrieve and parse.
+   * @returns {number} - The parsed numeric value.
+   */
   _getAsNumber (property) {
     return parseFloat(this._get(property));
   }
 
   /**
-     * Get a property value from the underlying SVG element as a string.
-     * @protected
-     * @param {string} property - The name of the property to retrieve as a string.
-     * @returns {string} - The property value as a string.
-     */
+   * Get a property value from the underlying SVG element as a string.
+   * @protected
+   * @param {string} property - The name of the property to retrieve as a string.
+   * @returns {string} - The property value as a string.
+   */
   _getAsString (property) {
-    return _get(property);
+    return this._get(property);
   }
 
   /**
-     * Check if the underlying SVG element has a specified attribute.
-     * @protected
-     * @param {string} property - The name of the attribute to check.
-     * @returns {boolean} - `true` if the attribute exists, otherwise `false`.
-     */
+   * Check if the underlying SVG element has a specified attribute.
+   * @protected
+   * @param {string} property - The name of the attribute to check.
+   * @returns {boolean} - `true` if the attribute exists, otherwise `false`.
+   */
   _has (property) {
     return this.Shape().hasAttribute(property);
   }
 
   /**
-     * Set a property on the underlying SVG element.
-     * @protected
-     * @param {string} property - The name of the property to set.
-     * @param {string} value - The value to set for the property.
-     */
+   * Set a property on the underlying SVG element.
+   * @protected
+   * @param {string} property - The name of the property to set.
+   * @param {string} value - The value to set for the property.
+   */
   _set (property, value) {
     this.Shape().setAttribute(property, value);
   }
 
+  /**
+   * Get the ID of the SVG element.
+   * @returns {string} - The ID attribute value.
+   */
   getID () {
     return this._getAsString('id');
   }
 
+  /**
+   * Set the ID of the SVG element.
+   * @param {string} id - The new ID value.
+   */
   setID (id) {
     this._set('id', id);
   }
@@ -183,16 +191,30 @@ export class Element {
   // Methods
 
   /**
-     * Nest one or more Elements within the current element.
-     * @param {...Element} elements - The Elements to nest within the current element.
-     * @returns {Element} - The current Element instance.
-     */
+   * Nest one or more Elements within the current element.
+   * @param {...Element} elements - The Elements to nest within the current element.
+   * @returns {Element} - The current Element instance.
+   */
   nest (...elements) {
     elements.forEach(element => this.Shape().append(element.Shape()));
 
     return this;
   }
 
+  /**
+   * Create a deep copy of the current Element object.
+   * @returns {Element} A new Element object with the same properties.
+   */
+  clone () {
+    return new Element(this.#element);
+  }
+
+  /**
+   * Animate the SVG element.
+   * @param {Keyframe[]} keyframes - An array of keyframes.
+   * @param {object} options - Animation options.
+   * @returns {Element} - The current Element instance.
+   */
   Animate (keyframes, options) {
     this.Shape().animate(keyframes, options);
 
@@ -200,9 +222,9 @@ export class Element {
   }
 
   /**
-     * Get the underlying SVG element.
-     * @returns {SVGElement} - The SVG element.
-     */
+   * Get the underlying SVG element.
+   * @returns {SVGElement} - The SVG element.
+   */
   Shape () {
     return this.#element;
   }

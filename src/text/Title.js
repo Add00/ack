@@ -1,7 +1,7 @@
 import { FontStyle } from '../styles/FontStyle.js';
-import { TextControl } from './TextControl.js';
+import { Element } from '../Element.js';
 
-export class Title extends TextControl {
+export class Title extends Element {
   // Static
 
   static build (content, x = 0, y = 0, fontStyle = new FontStyle()) {
