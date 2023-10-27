@@ -1,6 +1,6 @@
 /* global describe, it , expect, beforeEach */
 
-import { Queue } from '../../src/containers/adapters/Queue.js';
+import { Queue } from '../../../src/containers/adapters/Queue.js';
 
 describe('Queue', () => {
   let queue;

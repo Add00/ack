@@ -1,6 +1,6 @@
 /* global describe, it , expect, beforeEach */
 
-import { Deque } from '../../src/containers/adapters/Deque.js';
+import { Deque } from '../../../src/containers/adapters/Deque.js';
 
 describe('Deque', () => {
   let deque;

@@ -1,6 +1,6 @@
 /* global describe, it , expect, beforeEach */
 
-import { Stack } from '../../src/containers/adapters/Stack.js';
+import { Stack } from '../../../src/containers/adapters/Stack.js';
 
 describe('Stack', () => {
   let stack;
