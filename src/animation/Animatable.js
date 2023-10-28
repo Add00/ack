@@ -63,10 +63,6 @@ export class Animatable extends Element {
     return super._set('repeatCount', count);
   }
 
-  getDuration () {
-    return this._get('repeatCount');
-  }
-
   // Methods
   start (time = 0) {
     console.log(super.Shape());

@@ -22,8 +22,8 @@ Canvas.build(standardCircle)
 
 Canvas.build(diameterCircle)
   .nest(
-    Title.build('Circle built from diamiter'),
-    Circle.buildFromDiamiter(
+    Title.build('Circle built from diameter'),
+    Circle.buildFromDiameter(
       CANVAS_WIDTH / 2,
       CANVAS_HEIGHT / 2,
       25

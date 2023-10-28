@@ -1,7 +1,6 @@
-import { Canvas } from '../../svg/Canvas.js';
-import { Text } from '../../svg/text/Text.js';
-import { TextSpan } from '../../svg/text/TextSpan.js';
-import { FillStyle } from '../../svg/styles/FillStyle.js';
+import { Canvas } from '../../import/general.js';
+import { FillStyle } from '../../import/styles.js';
+import { Text, TextSpan } from '../../import/text.js';
 
 const standardText = document.getElementById('standard-text');
 const rotateText = document.getElementById('rotate-text');

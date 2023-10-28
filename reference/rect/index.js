@@ -1,6 +1,6 @@
-import { Canvas } from '../../svg/Canvas.js';
 import { Title } from '../../import/text.js';
 import { Rect } from '../../import/geometry.js';
+import { Canvas } from '../../import/general.js';
 import { Vector2 } from '../../import/containers.js';
 
 const standardRect = document.getElementById('standard-rect');

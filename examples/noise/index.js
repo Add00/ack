@@ -1,6 +1,6 @@
 import { Rect } from '../../import/geometry.js';
-import { Noise, Canvas, ExtendedMath as EMath } from '../../import/general.js';
 import { FillStyle } from '../../import/styles.js';
+import { Noise, Canvas, ExtendedMath as EMath } from '../../import/general.js';
 
 const svg = document.getElementById('graph');
 
