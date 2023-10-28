@@ -1,10 +1,20 @@
 import { Poly } from './Poly.js';
 
 /**
+ * Represents an SVG polyline.
  * @extends {Poly}
  */
 export class Polyline extends Poly {
   // Static
+
+  /**
+   * Parse an object into a Polyline.
+   * @param {Object} rect - An object with properties (x, y).
+   * @returns {Rect} A new Rect object.
+   */
+  static parse ({ x, y }) {
+    return new Polyline(x, y);
+  }
 
   static build (x, y) {
     return new Polyline(x, y);
@@ -39,5 +49,11 @@ export class Polyline extends Poly {
 
   getY () {
     return super._get('y');
+  }
+
+  // Methods
+
+  clone () {
+    return new Polyline();
   }
 }

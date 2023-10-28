@@ -1,7 +1,7 @@
 import { Conic } from './Conic.js';
 
 /**
- * Define Circle class that extends Shape class.
+ * Represents a circular shape.
  * @extends {Geometry}
  */
 export class Circle extends Conic {
@@ -19,16 +19,16 @@ export class Circle extends Conic {
     );
   }
 
-  static buildFromDiamiter (x, y, d) {
+  static buildFromDiameter (x, y, d) {
     return new Circle(x, y, d / 2);
   }
 
   /**
-     * Create a Circle instance.
-     * @param {number} x - The x coordinate of the center of the circle.
-     * @param {number} y - The y coordinate of the center of the circle.
-     * @param {number} r - The radius of the circle.
-     */
+   * Create a Circle instance.
+   * @param {number} x - The x coordinate of the center of the circle.
+   * @param {number} y - The y coordinate of the center of the circle.
+   * @param {number} r - The radius of the circle.
+   */
   constructor (x, y, r) {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'circle'));
 
@@ -40,10 +40,10 @@ export class Circle extends Conic {
   // Accessors
 
   /**
-     * Set the radius of the circle.
-     * @param {number} r - The new radius of the circle.
-     * @returns {Circle} - The instance of the Circle class.
-     */
+   * Set the radius of the circle.
+   * @param {number} r - The new radius of the circle.
+   * @returns {Circle} - The instance of the Circle class.
+   */
   setRadius (r) {
     super._set('r', r);
 
@@ -51,14 +51,23 @@ export class Circle extends Conic {
   }
 
   /**
-     * Get the radius of the circle.
-     * @returns {number} - The radius of the circle.
-     */
+   * Get the radius of the circle.
+   * @returns {number} - The radius of the circle.
+   */
   getRadius () {
     return super._getAsNumber('r');
   }
 
   // Methods
+
+  /**
+   * Create a deep copy of the current Circle object.
+   * @override
+   * @returns {Circle} A new Circle object with the same properties.
+   */
+  clone () {
+    return new Circle(this.getX(), this.getY(), this.getRadius());
+  }
 
   isColliding (other) {
     const dx = this.getX() - other.getX();

@@ -9,7 +9,7 @@ export class Rect extends Geometry {
   // Static
 
   /**
-   * Create a Rect object by parsing an object with properties.
+   * Parse an object into a Rect.
    * @param {Object} rect - An object with properties (x, y, width, height, rx, ry).
    * @returns {Rect} A new Rect object.
    */

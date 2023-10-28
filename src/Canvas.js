@@ -2,6 +2,7 @@ import { Geometry } from '../src/geometry/Geometry.js';
 
 /**
  * Represents an SVG element that operates as an OOP interface.
+ * @extends Geometry
  */
 export class Canvas extends Geometry {
   static build (svg) {

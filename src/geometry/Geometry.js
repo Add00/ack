@@ -43,10 +43,10 @@ export class Geometry extends Graphic {
   }
 
   /**
-     * Set the opacity of the shape.
-     * @param {number} [opacity=1] - The opacity value can be between 0 and 1 (default is 1).
-     * @returns {Shape} - The current Shape instance for method chaining.
-     */
+   * Set the opacity of the shape.
+   * @param {number} [opacity=1] - The opacity value can be between 0 and 1 (default is 1).
+   * @returns {Shape} - The current Shape instance for method chaining.
+   */
   setOpacity (opacity = 1) {
     super.Shape().setAttribute('opacity', opacity);
 
@@ -54,9 +54,9 @@ export class Geometry extends Graphic {
   }
 
   /**
-     * Get the opacity of the shape.
-     * @returns {number|null} - The opacity value or null if not set.
-     */
+   * Get the opacity of the shape.
+   * @returns {number|null} - The opacity value or null if not set.
+   */
   getOpacity () {
     return super._get('opacity');
   }
