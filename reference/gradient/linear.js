@@ -8,7 +8,7 @@ const svg = document.getElementById('graph');
 const gradient = new LinearGradient()
   .setGradientTransform('rotate(90)')
   .nest(
-    new Stop(0, 'gold', 0).onMouse.click(() => console.log('hi world!')),
+    new Stop(0, 'gold', 0),
     new Stop(0.5, 'grey', 0.5),
     new Stop(1, 'red', 1)
   );
