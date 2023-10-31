@@ -5,8 +5,8 @@ export class Stop extends Element {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'stop'));
 
     this.setOffset(offset);
-    this.setStopColor(color);
-    this.setStopOpacity(opacity);
+    this.setColor(color);
+    this.setOpacity(opacity);
   }
 
   setOffset (offset) {
@@ -17,19 +17,19 @@ export class Stop extends Element {
     return super._getAsNumber('offset');
   }
 
-  setStopColor (color) {
+  setColor (color) {
     super._set('stop-color', color);
   }
 
-  getStopColor () {
-    return super._getAsNumber('color');
+  getColor () {
+    return super._getAsString('stop-color');
   }
 
-  setStopOpacity (opacity) {
+  setOpacity (opacity) {
     super._set('stop-opacity', opacity);
   }
 
-  getStopOpacity () {
-    return super._getAsNumber('opacity');
+  getOpacity () {
+    return super._getAsNumber('stop-opacity');
   }
 }

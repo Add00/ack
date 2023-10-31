@@ -1,5 +1,9 @@
 import { Element } from '../Element.js';
 
+/**
+ * Represents a gradient element for SVG elements.
+ * @extends Element
+ */
 export class Gradient extends Element {
   setHref (href) {
     super._set('href', href);
@@ -21,23 +25,28 @@ export class Gradient extends Element {
     return super._getAsString('gradientUnits');
   }
 
-  getGradientTransform () {
-    return super._getAsString('gradientTransform');
-  }
-
   setGradientTransform (transform) {
     super._set('gradientTransform', transform);
 
     return this;
   }
 
-  getSpreadMethod () {
-    return super._getAsString('spreadMethod');
+  getGradientTransform () {
+    return super._getAsString('gradientTransform');
   }
 
+  /**
+   * Sets the spread method for a gradient.
+   * @param {'pad' | 'reflect' | 'repeat'} method the new method that will be used.
+   * @returns the current instance.
+   */
   setSpreadMethod (method) {
     super._set('spreadMethod', method);
 
     return this;
+  }
+
+  getSpreadMethod () {
+    return super._getAsString('spreadMethod');
   }
 }
