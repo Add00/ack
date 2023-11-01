@@ -5,12 +5,24 @@ import { Gradient } from './Gradient.js';
  * @extends Gradient
  */
 export class LinearGradient extends Gradient {
-  constructor () {
+  /**
+   * Create a new LinearGradient instance.
+   * @param {number} x1 Set the x coordinate of the starting point of the gradient.
+   * @param {number} y1 Set the y coordinate of the starting point of the gradient.
+   * @param {number} x2 Set the x coordinate of the ending point of the gradient.
+   * @param {number} y2 Set the y coordinate of the ending point of the gradient.
+   */
+  constructor (x1 = 0, y1 = 0, x2 = 1, y2 = 1) {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient'));
+
+    this.setX1(x1);
+    this.setY1(y1);
+    this.setX2(x2);
+    this.setY2(y2);
   }
 
   /**
-   * Set the x1 coordinate of the linear gradient.
+   * Set the x coordinate of the starting point of the gradient.
    * @param {number} x1 - The x1 coordinate.
    * @returns {LinearGradient} The current instance.
    */
@@ -21,7 +33,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Get the x1 coordinate of the linear gradient.
+   * Get the x coordinate of the starting point of the gradient.
    * @returns {number} The x1 coordinate.
    */
   getX1 () {
@@ -29,7 +41,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Set the x2 coordinate of the linear gradient.
+   * Set the x coordinate of the ending point of the gradient.
    * @param {number} x2 - The x2 coordinate.
    * @returns {LinearGradient} The current instance.
    */
@@ -40,7 +52,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Get the x2 coordinate of the linear gradient.
+   * Get the x coordinate of the ending point of the gradient.
    * @returns {number} The x2 coordinate.
    */
   getX2 () {
@@ -48,7 +60,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Set the y1 coordinate of the linear gradient.
+   * Set the y coordinate of the starting point of the gradient.
    * @param {number} y1 - The y1 coordinate.
    * @returns {LinearGradient} The current instance.
    */
@@ -59,7 +71,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Get the y1 coordinate of the linear gradient.
+   * Get the y coordinate of the starting point of the gradient.
    * @returns {number} The y1 coordinate.
    */
   getY1 () {
@@ -67,7 +79,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Set the y2 coordinate of the linear gradient.
+   * Set the y coordinate of the ending point of the gradient.
    * @param {number} y2 - The y2 coordinate.
    * @returns {LinearGradient} The current instance.
    */
@@ -78,7 +90,7 @@ export class LinearGradient extends Gradient {
   }
 
   /**
-   * Get the y2 coordinate of the linear gradient.
+   * Get the y coordinate of the ending point of the gradient.
    * @returns {number} The y2 coordinate.
    */
   getY2 () {
