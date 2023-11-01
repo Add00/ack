@@ -1,6 +1,9 @@
 export class Element {
+  // Static
+
   /**
    * A private map to store the counts of different tag names.
+   *
    * @type {Map<string, number>}
    * @private
    */
@@ -8,13 +11,44 @@ export class Element {
 
   /**
    * A private counter to generate unique tabindex values.
+   *
    * @type {number}
    * @private
    */
   static #count = 0;
 
+  static #autoTabIndex = true;
+
+  /**
+   * Sets a custom naming strategy for generating unique IDs.
+   *
+   * @param {function} strategy - The custom naming strategy function.
+   */
+  static setCustomNamingStrategy (strategy) {}
+
+  /**
+   * Checks if automatic tabindex generation is enabled.
+   *
+   * @returns {boolean} - `true` if auto tab indexing is enabled, `false` otherwise.
+   */
+  static isAutoTabIndexing () {
+    return Element.#autoTabIndex;
+  }
+
+  /**
+   * Toggles automatic tabindex generation on or off.
+   *
+   * @returns {Element} - The current Element instance.
+   */
+  static toggleAutoTabIndexing () {
+    Element.#autoTabIndex = !Element.#autoTabIndex;
+
+    return this;
+  }
+
   /**
    * The underlying SVG element.
+   *
    * @type {SVGElement}
    * @private
    */
@@ -22,6 +56,7 @@ export class Element {
 
   /**
    * Creates a new Element instance.
+   *
    * @param {SVGElement} element - The underlying SVG element to wrap.
    */
   constructor (element) {
@@ -41,7 +76,7 @@ export class Element {
     }
 
     // Generate and set 'tabindex' attribute if missing
-    if (!this.#element.hasAttribute('tabindex')) {
+    if (Element.#autoTabIndex && !this.#element.hasAttribute('tabindex')) {
       this.#element.setAttribute('tabindex', Element.#count);
 
       Element.#count++;
@@ -50,8 +85,31 @@ export class Element {
 
   // Event handlers
 
+  /**
+   * Adds an event listener to element.
+   *
+   * @param {string} eventType - The type of event to listen for.
+   * @param {Function} fn - The event handler function.
+   * @param {object} [options] - Optional event listener options.
+   * @returns {Element} - The current Element instance.
+   */
   addEventListener (eventType, fn, options = undefined) {
     this.Shape().addEventListener(eventType, fn, options);
+
+    return this;
+  }
+
+  /**
+   * Removes an event listener from the element. That was perviously added.
+   *
+   * @param {string} eventType - The type of event to listen for.
+   * @param {Function} fn - The event handler function.
+   * @param {object} options - Optional event listener options.
+   * @returns {Element} - The current Element instance.
+   */
+  removeEventListener (eventType, fn, options = undefined) {
+    this.Shape().removeEventListener(eventType, fn, options);
+
     return this;
   }
 
@@ -124,6 +182,8 @@ export class Element {
 
   /**
    * Get a property value from the underlying SVG element.
+   *
+   * @deprecated
    * @protected
    * @param {string} property - The name of the property to retrieve.
    * @returns {string|null} - The value of the property.
@@ -134,16 +194,18 @@ export class Element {
 
   /**
    * Get a property value from the underlying SVG element and parse it as a number.
+   *
    * @protected
    * @param {string} property - The name of the property to retrieve and parse.
    * @returns {number} - The parsed numeric value.
    */
   _getAsNumber (property) {
-    return parseFloat(this._get(property));
+    return Number(this._get(property));
   }
 
   /**
    * Get a property value from the underlying SVG element as a string.
+   *
    * @protected
    * @param {string} property - The name of the property to retrieve as a string.
    * @returns {string} - The property value as a string.
@@ -154,6 +216,7 @@ export class Element {
 
   /**
    * Check if the underlying SVG element has a specified attribute.
+   *
    * @protected
    * @param {string} property - The name of the attribute to check.
    * @returns {boolean} - `true` if the attribute exists, otherwise `false`.
@@ -164,6 +227,7 @@ export class Element {
 
   /**
    * Set a property on the underlying SVG element.
+   *
    * @protected
    * @param {string} property - The name of the property to set.
    * @param {string} value - The value to set for the property.
@@ -173,7 +237,8 @@ export class Element {
   }
 
   /**
-   * Get the ID of the SVG element.
+   * Get the ID of the Element.
+   *
    * @returns {string} - The ID attribute value.
    */
   getID () {
@@ -182,6 +247,7 @@ export class Element {
 
   /**
    * Set the ID of the SVG element.
+   *
    * @param {string} id - The new ID value.
    */
   setID (id) {
@@ -192,6 +258,7 @@ export class Element {
 
   /**
    * Nest one or more Elements within the current element.
+   *
    * @param {...Element} elements - The Elements to nest within the current element.
    * @returns {Element} - The current Element instance.
    */
@@ -203,14 +270,16 @@ export class Element {
 
   /**
    * Create a deep copy of the current Element object.
+   *
    * @returns {Element} A new Element object with the same properties.
    */
   clone () {
-    return new Element(this.#element);
+    return new Element(document.createElementNS('http://www.w3.org/2000/svg', this.Shape().tagName));
   }
 
   /**
    * Animate the SVG element.
+   *
    * @param {Keyframe[]} keyframes - An array of keyframes.
    * @param {object} options - Animation options.
    * @returns {Element} - The current Element instance.
@@ -223,6 +292,7 @@ export class Element {
 
   /**
    * Get the underlying SVG element.
+   *
    * @returns {SVGElement} - The SVG element.
    */
   Shape () {
