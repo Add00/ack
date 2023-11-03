@@ -1,30 +1,79 @@
+/**
+ * A generator function that yields unique IDs based on the provided tag names.
+ * The function generates IDs in the format "tagname-1", "tagname-2", and so on.
+ *
+ * @generator
+ * @function
+ * @yields {string} A unique ID based on the provided tag name.
+ */
+function * defaultIDGenerator () {
+  /**
+   * Stores the counts of different tag names.
+   *
+   * @type {Map<string, number>}
+   */
+  const tags = new Map();
+  let tagName = null;
+
+  while (true) {
+    if (!tags.has(tagName)) {
+      tags.set(tagName, 0);
+    } else {
+      tags.set(tagName, tags.get(tagName) + 1);
+    }
+
+    tagName = yield `${tagName}-${tags.get(tagName)}`;
+  }
+}
+
+/**
+ * Wrapper class for an SVG Element.
+ * Provides access to the underlying features of the Element.
+ */
 export class Element {
   // Static
 
   /**
-   * A private map to store the counts of different tag names.
-   *
-   * @type {Map<string, number>}
-   * @private
-   */
-  static #tags = new Map();
-
-  /**
    * A private counter to generate unique tabindex values.
    *
-   * @type {number}
    * @private
+   * @type {number}
    */
   static #count = 0;
 
+  /**
+   * A private boolean to check if the built in automatic tab numbering should be used.
+   *
+   * @private
+   * @type {boolean}
+   */
   static #autoTabIndex = true;
 
   /**
-   * Sets a custom naming strategy for generating unique IDs.
+   * A private generator for creating unique IDs for elements.
    *
-   * @param {function} strategy - The custom naming strategy function.
+   * @private
+   * @type {GeneratorFunction}
    */
-  static setCustomNamingStrategy (strategy) {}
+  static #idGenerator = defaultIDGenerator();
+
+  static {
+    Element.#idGenerator.next();
+  }
+
+  /**
+   * Change the ID generator function and optionally skip the first ID.
+   *
+   * @param {GeneratorFunction} generator - The new generator function for creating unique IDs.
+   * @param {boolean} [skipFirst=false] - Whether to skip the first generated ID.
+   */
+  static setIDGenerator (generator, skipFirst = false) {
+    Element.#idGenerator = generator();
+
+    if (skipFirst) {
+      Element.#idGenerator.next();
+    }
+  }
 
   /**
    * Checks if automatic tabindex generation is enabled.
@@ -62,17 +111,11 @@ export class Element {
   constructor (element) {
     this.#element = element;
 
-    // Generate and set 'id' attribute if missing
+    // Generate and set 'id' attribute
     if (!this.#element.hasAttribute('id')) {
-      const tagName = this.#element.tagName;
+      const id = Element.#idGenerator.next(element.tagName).value;
 
-      if (!Element.#tags.has(tagName)) {
-        Element.#tags.set(tagName, 0);
-      } else {
-        Element.#tags.set(tagName, Element.#tags.get(tagName) + 1);
-      }
-
-      this.#element.setAttribute('id', `${tagName}-${Element.#tags.get(tagName)}`);
+      this.#element.setAttribute('id', id);
     }
 
     // Generate and set 'tabindex' attribute if missing

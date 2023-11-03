@@ -1,81 +1,68 @@
-/* global describe, it , expect, beforeEach, afterEach */
+/* global describe, it , expect, beforeEach, jasmine */
 import { Element } from '../import/general.js';
 
-describe('Element', () => {
-  let svgElement;
+describe('Element Class', () => {
+  let svg;
   let element;
 
   beforeEach(() => {
-    // Create a dummy SVG element for testing
-    svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    element = new Element(svgElement);
+    if (!Element.isAutoTabIndexing()) {
+      Element.toggleAutoTabIndexing();
+    }
+
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    element = new Element(svg);
   });
 
-  afterEach(() => {
-    // Clean up after each test
-    element = null;
-    svgElement = null;
+  it('should have a valid ID', () => {
+    expect(element.getID()).toMatch(/^svg-\d+$/); // Check if ID matches the expected format
   });
 
-  it('should create a new Element instance', () => {
-    expect(element).toBeDefined();
-    expect(element instanceof Element).toBe(true);
+  it('should set a custom ID', () => {
+    element.setID('custom-id');
+    expect(element.getID()).toBe('custom-id');
   });
 
-  it('should generate and set an ID attribute if missing', () => {
-    const tagName = svgElement.tagName;
-    const expectedId = `${tagName}-0`;
+  it('should have tabindex attribute when autoTabIndex is enabled', () => {
+    element = new Element(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
 
-    console.log(element);
-
-    expect(element.getID()).toBe(expectedId);
+    expect(element.Shape().hasAttribute('tabindex')).toBe(true);
   });
 
-  it('should set the ID of the SVG element', () => {
-    const newId = 'new-id';
-    element.setID(newId);
+  it('should not have tabindex attribute when autoTabIndex is disabled', () => {
+    Element.toggleAutoTabIndexing(); // Disable autoTabIndex
+    element = new Element(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
 
-    expect(element.getID()).toBe(newId);
+    expect(element.Shape().hasAttribute('tabindex')).toBe(false);
   });
 
   it('should add and remove event listeners', () => {
-    let eventCount = 0;
+    const eventType = 'click';
+    const fn = jasmine.createSpy('eventHandler');
 
-    const eventHandler = () => {
-      eventCount++;
-    };
+    // Add event listener
+    element.addEventListener(eventType, fn);
+    element.Shape().dispatchEvent(new Event(eventType));
+    expect(fn).toHaveBeenCalled();
 
-    element.addEventListener('click', eventHandler);
-    svgElement.dispatchEvent(new Event('click'));
-    expect(eventCount).toBe(1);
-
-    element.removeEventListener('click', eventHandler);
-    svgElement.dispatchEvent(new Event('click'));
-    expect(eventCount).toBe(1); // Event listener should be removed, count remains the same
+    // Remove event listener
+    element.removeEventListener(eventType, fn);
+    element.Shape().dispatchEvent(new Event(eventType));
+    expect(fn).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle automatic tabindex generation on and off', () => {
-    expect(Element.isAutoTabIndexing()).toBe(true);
-
-    Element.toggleAutoTabIndexing();
-    expect(Element.isAutoTabIndexing()).toBe(false);
-
-    Element.toggleAutoTabIndexing();
-    expect(Element.isAutoTabIndexing()).toBe(true);
+  it('should create a deep copy of the element', () => {
+    const copy = element.clone();
+    expect(copy).not.toBe(element); // Check if it's a different instance
+    expect(copy.Shape()).not.toBe(element.Shape()); // Check if the underlying element is different
   });
 
   it('should nest elements within the current element', () => {
-    const nestedElement = new Element(document.createElementNS('http://www.w3.org/2000/svg', 'circle'));
+    const childElement = new Element(document.createElementNS('http://www.w3.org/2000/svg', 'rect'));
+    element.nest(childElement);
 
-    element.nest(nestedElement);
-
-    expect(svgElement.contains(nestedElement.Shape())).toBe(true);
-  });
-
-  it('should create a deep copy of the current Element object', () => {
-    const clonedElement = element.clone();
-    expect(clonedElement instanceof Element).toBe(true);
-    expect(clonedElement.Shape()).not.toBe(element.Shape()); // Not the same instance
+    expect(element.Shape().children.length).toBe(1);
+    expect(element.Shape().children[0]).toBe(childElement.Shape());
   });
 
   it('should animate the SVG element', () => {
@@ -84,8 +71,8 @@ describe('Element', () => {
 
     element.Animate(keyframes, options);
 
-    // Check that the animation was applied to the SVG element
-    const animations = svgElement.getAnimations();
+    const animations = svg.getAnimations();
+
     expect(animations.length).toBeGreaterThan(0);
   });
 });
