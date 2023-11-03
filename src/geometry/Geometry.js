@@ -58,7 +58,7 @@ export class Geometry extends Graphic {
    * @returns {number|null} - The opacity value or null if not set.
    */
   getOpacity () {
-    return super._get('opacity');
+    return super._getAsNumber('opacity');
   }
 
   setPointerEvents (pointerEvent) {

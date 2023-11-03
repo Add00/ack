@@ -38,7 +38,7 @@ export class Polyline extends Poly {
   }
 
   getX () {
-    return super._get('x');
+    return super._getAsNumber('x');
   }
 
   setY (y) {
@@ -48,7 +48,7 @@ export class Polyline extends Poly {
   }
 
   getY () {
-    return super._get('y');
+    return super._getAsNumber('y');
   }
 
   // Methods

@@ -1,20 +1,103 @@
-export class Element {
+/**
+ * A generator function that yields unique IDs based on the provided tag names.
+ * The function generates IDs in the format "tagname-1", "tagname-2", and so on.
+ *
+ * @generator
+ * @function
+ * @yields {string} A unique ID based on the provided tag name.
+ */
+function * defaultIDGenerator () {
   /**
-   * A private map to store the counts of different tag names.
+   * Stores the counts of different tag names.
+   *
    * @type {Map<string, number>}
-   * @private
    */
-  static #tags = new Map();
+  const tags = new Map();
+  let tagName = null;
+
+  while (true) {
+    if (!tags.has(tagName)) {
+      tags.set(tagName, 0);
+    } else {
+      tags.set(tagName, tags.get(tagName) + 1);
+    }
+
+    tagName = yield `${tagName}-${tags.get(tagName)}`;
+  }
+}
+
+/**
+ * Wrapper class for an SVG Element.
+ * Provides access to the underlying features of the Element.
+ */
+export class Element {
+  // Static
 
   /**
    * A private counter to generate unique tabindex values.
-   * @type {number}
+   *
    * @private
+   * @type {number}
    */
   static #count = 0;
 
   /**
+   * A private boolean to check if the built in automatic tab numbering should be used.
+   *
+   * @private
+   * @type {boolean}
+   */
+  static #autoTabIndex = true;
+
+  /**
+   * A private generator for creating unique IDs for elements.
+   *
+   * @private
+   * @type {GeneratorFunction}
+   */
+  static #idGenerator = defaultIDGenerator();
+
+  static {
+    Element.#idGenerator.next();
+  }
+
+  /**
+   * Change the ID generator function and optionally skip the first ID.
+   *
+   * @param {GeneratorFunction} generator - The new generator function for creating unique IDs.
+   * @param {boolean} [skipFirst=false] - Whether to skip the first generated ID.
+   */
+  static setIDGenerator (generator, skipFirst = false) {
+    Element.#idGenerator = generator();
+
+    if (skipFirst) {
+      Element.#idGenerator.next();
+    }
+  }
+
+  /**
+   * Checks if automatic tabindex generation is enabled.
+   *
+   * @returns {boolean} - `true` if auto tab indexing is enabled, `false` otherwise.
+   */
+  static isAutoTabIndexing () {
+    return Element.#autoTabIndex;
+  }
+
+  /**
+   * Toggles automatic tabindex generation on or off.
+   *
+   * @returns {Element} - The current Element instance.
+   */
+  static toggleAutoTabIndexing () {
+    Element.#autoTabIndex = !Element.#autoTabIndex;
+
+    return this;
+  }
+
+  /**
    * The underlying SVG element.
+   *
    * @type {SVGElement}
    * @private
    */
@@ -22,26 +105,21 @@ export class Element {
 
   /**
    * Creates a new Element instance.
+   *
    * @param {SVGElement} element - The underlying SVG element to wrap.
    */
   constructor (element) {
     this.#element = element;
 
-    // Generate and set 'id' attribute if missing
+    // Generate and set 'id' attribute
     if (!this.#element.hasAttribute('id')) {
-      const tagName = this.#element.tagName;
+      const id = Element.#idGenerator.next(element.tagName).value;
 
-      if (!Element.#tags.has(tagName)) {
-        Element.#tags.set(tagName, 0);
-      } else {
-        Element.#tags.set(tagName, Element.#tags.get(tagName) + 1);
-      }
-
-      this.#element.setAttribute('id', `${tagName}-${Element.#tags.get(tagName)}`);
+      this.#element.setAttribute('id', id);
     }
 
     // Generate and set 'tabindex' attribute if missing
-    if (!this.#element.hasAttribute('tabindex')) {
+    if (Element.#autoTabIndex && !this.#element.hasAttribute('tabindex')) {
       this.#element.setAttribute('tabindex', Element.#count);
 
       Element.#count++;
@@ -50,8 +128,31 @@ export class Element {
 
   // Event handlers
 
+  /**
+   * Adds an event listener to element.
+   *
+   * @param {string} eventType - The type of event to listen for.
+   * @param {Function} fn - The event handler function.
+   * @param {object} [options] - Optional event listener options.
+   * @returns {Element} - The current Element instance.
+   */
   addEventListener (eventType, fn, options = undefined) {
     this.Shape().addEventListener(eventType, fn, options);
+
+    return this;
+  }
+
+  /**
+   * Removes an event listener from the element. That was perviously added.
+   *
+   * @param {string} eventType - The type of event to listen for.
+   * @param {Function} fn - The event handler function.
+   * @param {object} options - Optional event listener options.
+   * @returns {Element} - The current Element instance.
+   */
+  removeEventListener (eventType, fn, options = undefined) {
+    this.Shape().removeEventListener(eventType, fn, options);
+
     return this;
   }
 
@@ -124,36 +225,40 @@ export class Element {
 
   /**
    * Get a property value from the underlying SVG element.
-   * @protected
+   *
+   * @private
    * @param {string} property - The name of the property to retrieve.
    * @returns {string|null} - The value of the property.
    */
-  _get (property) {
+  #get (property) {
     return this.Shape().getAttribute(property);
   }
 
   /**
    * Get a property value from the underlying SVG element and parse it as a number.
+   *
    * @protected
    * @param {string} property - The name of the property to retrieve and parse.
    * @returns {number} - The parsed numeric value.
    */
   _getAsNumber (property) {
-    return parseFloat(this._get(property));
+    return Number(this.#get(property));
   }
 
   /**
    * Get a property value from the underlying SVG element as a string.
+   *
    * @protected
    * @param {string} property - The name of the property to retrieve as a string.
    * @returns {string} - The property value as a string.
    */
   _getAsString (property) {
-    return this._get(property);
+    return this.#get(property);
   }
 
   /**
    * Check if the underlying SVG element has a specified attribute.
+   *
    * @protected
    * @param {string} property - The name of the attribute to check.
    * @returns {boolean} - `true` if the attribute exists, otherwise `false`.
@@ -164,6 +269,7 @@ export class Element {
 
   /**
    * Set a property on the underlying SVG element.
+   *
    * @protected
    * @param {string} property - The name of the property to set.
    * @param {string} value - The value to set for the property.
@@ -173,7 +279,8 @@ export class Element {
   }
 
   /**
-   * Get the ID of the SVG element.
+   * Get the ID of the Element.
+   *
    * @returns {string} - The ID attribute value.
    */
   getID () {
@@ -182,6 +289,7 @@ export class Element {
 
   /**
    * Set the ID of the SVG element.
+   *
    * @param {string} id - The new ID value.
    */
   setID (id) {
@@ -192,6 +300,7 @@ export class Element {
 
   /**
    * Nest one or more Elements within the current element.
+   *
    * @param {...Element} elements - The Elements to nest within the current element.
    * @returns {Element} - The current Element instance.
    */
@@ -203,14 +312,16 @@ export class Element {
 
   /**
    * Create a deep copy of the current Element object.
+   *
    * @returns {Element} A new Element object with the same properties.
    */
   clone () {
-    return new Element(this.#element);
+    return new Element(document.createElementNS('http://www.w3.org/2000/svg', this.Shape().tagName));
   }
 
   /**
    * Animate the SVG element.
+   *
    * @param {Keyframe[]} keyframes - An array of keyframes.
    * @param {object} options - Animation options.
    * @returns {Element} - The current Element instance.
@@ -223,6 +334,7 @@ export class Element {
 
   /**
    * Get the underlying SVG element.
+   *
    * @returns {SVGElement} - The SVG element.
    */
   Shape () {
