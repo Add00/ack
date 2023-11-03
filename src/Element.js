@@ -183,12 +183,11 @@ export class Element {
   /**
    * Get a property value from the underlying SVG element.
    *
-   * @deprecated
-   * @protected
+   * @private
    * @param {string} property - The name of the property to retrieve.
    * @returns {string|null} - The value of the property.
    */
-  _get (property) {
+  #get (property) {
     return this.Shape().getAttribute(property);
   }
 
@@ -200,7 +199,7 @@ export class Element {
    * @returns {number} - The parsed numeric value.
    */
   _getAsNumber (property) {
-    return Number(this._get(property));
+    return Number(this.#get(property));
   }
 
   /**
@@ -211,7 +210,7 @@ export class Element {
    * @returns {string} - The property value as a string.
    */
   _getAsString (property) {
-    return this._get(property);
+    return this.#get(property);
   }
 
   /**

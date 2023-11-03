@@ -35,7 +35,7 @@ export class Canvas extends Geometry {
   constructor (svg) {
     super(svg);
 
-    this.#viewBox = super._get('viewBox').split(' ').map(Number);
+    this.#viewBox = super._getAsString('viewBox').split(' ').map(Number);
   }
 
   /**

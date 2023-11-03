@@ -10,7 +10,7 @@ export class TextPositioning extends TextContent {
   }
 
   getX () {
-    return super._get('x');
+    return super._getAsNumber('x');
   }
 
   setY (y) {
@@ -20,7 +20,7 @@ export class TextPositioning extends TextContent {
   }
 
   getY () {
-    return super._get('y');
+    return super._getAsNumber('y');
   }
 
   setShiftX (dx) {

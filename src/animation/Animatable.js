@@ -1,10 +1,6 @@
 import { Element } from '../Element.js';
 
 export class Animatable extends Element {
-  constructor (animateable) {
-    super(animateable);
-  }
-
   // Event Handlers
 
   onBegin (fn, options = undefined) {
@@ -32,7 +28,7 @@ export class Animatable extends Element {
   }
 
   getAttribute () {
-    return this._get('attributeName');
+    return this._getAsString('attributeName');
   }
 
   setFrom (from) {
@@ -40,7 +36,7 @@ export class Animatable extends Element {
   }
 
   getFrom () {
-    return this._get('from');
+    return this._getAsNumber('from');
   }
 
   setTo (to) {
@@ -48,7 +44,7 @@ export class Animatable extends Element {
   }
 
   getTo () {
-    return this._get('to');
+    return this._getAsNumber('to');
   }
 
   setDuration (duration) {
@@ -56,7 +52,7 @@ export class Animatable extends Element {
   }
 
   getDuration () {
-    return this._get('duration');
+    return this._getAsNumber('duration');
   }
 
   setRepeat (count) {
