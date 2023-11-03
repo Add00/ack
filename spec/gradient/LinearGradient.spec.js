@@ -1,4 +1,4 @@
-/* global describe, it , expect, beforeEach, afterEach */
+/* global describe, it , expect, beforeEach */
 import { LinearGradient } from '../../import/gradient.js';
 
 describe('LinearGradient', () => {
@@ -6,10 +6,6 @@ describe('LinearGradient', () => {
 
   beforeEach(() => {
     linearGradient = new LinearGradient();
-  });
-
-  afterEach(() => {
-    linearGradient = null;
   });
 
   it('should create an instance of LinearGradient', () => {

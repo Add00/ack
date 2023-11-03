@@ -6,11 +6,9 @@ import { FillStyle } from '../../src/styles/FillStyle.js';
 const svg = document.getElementById('graph');
 
 const gradient = new RadialGradient()
-  .setGradientTransform('rotate(90)')
   .nest(
-    new Stop(0, 'gold', 0),
-    new Stop(0.5, 'grey', 0.5),
-    new Stop(1, 'red', 1)
+    new Stop(0.1, 'gold'),
+    new Stop(0.95, 'red')
   );
 
 const define = new Define()

@@ -1,4 +1,4 @@
-/* global describe, it , expect, beforeEach, afterEach */
+/* global describe, it , expect, beforeEach */
 import { Stop } from '../../import/gradient.js';
 
 describe('Stop', () => {
@@ -6,10 +6,6 @@ describe('Stop', () => {
 
   beforeEach(() => {
     stop = new Stop();
-  });
-
-  afterEach(() => {
-    stop = null;
   });
 
   it('should create an instance of Stop', () => {
