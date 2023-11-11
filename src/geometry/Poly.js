@@ -1,16 +1,19 @@
 import { Geometry } from './Geometry.js';
 
 /**
+ * An inheritable class.
+ *
  * @extends {Geometry}
  */
 export class Poly extends Geometry {
   // Accessors
 
   /**
-   * Add a point to the polygon's points attribute.
-   * @param {number} x - The X-coordinate of the point to add.
-   * @param {number} y - The Y-coordinate of the point to add.
-   * @returns {Poly} - The current Poly instance for method chaining.
+   * Add a point to the polygon.
+   *
+   * @param {number} x - The x-coordinate of the point to add.
+   * @param {number} y - The y-coordinate of the point to add.
+   * @returns {Poly} - The current instance.
    */
   setPoint (x, y) {
     const points = this.getPoints() + `${x},${y} `;
@@ -20,7 +23,8 @@ export class Poly extends Geometry {
   }
 
   /**
-   * Get the points attribute of the polygon.
+   * Get all the points on the Polygon.
+   *
    * @returns {string} - The points in comma separated pairs, and pairs separated by spaces.
    */
   getPoints () {
@@ -28,8 +32,9 @@ export class Poly extends Geometry {
   }
 
   /**
-   * Clear all points from the polygon by resetting the points attribute to an empty string.
-   * @returns {Poly} - The current Poly instance for method chaining.
+   * Clear all points from the polygon.
+   *
+   * @returns {Poly} - The current instance.
    */
   clear () {
     super._set('points', '');
