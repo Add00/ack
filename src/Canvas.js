@@ -5,7 +5,7 @@ import { Geometry } from '../src/geometry/Geometry.js';
  * @extends Geometry
  */
 export class Canvas extends Geometry {
-  static build (svg) {
+  static from (svg) {
     return new Canvas(svg);
   }
 

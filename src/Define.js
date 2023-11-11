@@ -1,7 +1,7 @@
 import { Graphic } from './Graphic.js';
 
 export class Define extends Graphic {
-  static build (...elements) {
+  static from (...elements) {
     return new Define().nest(...elements);
   }
 

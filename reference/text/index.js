@@ -6,28 +6,28 @@ const standardText = document.getElementById('standard-text');
 const rotateText = document.getElementById('rotate-text');
 const nestedText = document.getElementById('nested-text');
 
-Canvas.build(standardText)
-  .nest(Text.build('Hello, World!', 10, 10));
+Canvas.from(standardText)
+  .nest(Text.from('Hello, World!', 10, 10));
 
-Canvas.build(rotateText)
+Canvas.from(rotateText)
   .nest(
-    Text.build('Hello, World!', 10, 10)
+    Text.from('Hello, World!', 10, 10)
       .setRotation(30)
   );
 
-Canvas.build(nestedText)
+Canvas.from(nestedText)
   .nest(
-    Text.build('Hel', 10, 10)
+    Text.from('Hel', 10, 10)
       .nest(
-        TextSpan.build('lo, ')
+        TextSpan.from('lo, ')
           .setFillStyle(
             new FillStyle({ fill: 'green' })
           ),
-        TextSpan.build(' Wor')
+        TextSpan.from(' Wor')
           .setFillStyle(
             new FillStyle({ fill: 'red' })
           ),
-        TextSpan.build('ld!')
+        TextSpan.from('ld!')
           .setFillStyle(
             new FillStyle({ fill: 'blue' })
           )

@@ -69,7 +69,7 @@ describe('Group', () => {
     const element1 = new Rect();
     const element2 = new Rect();
 
-    const newGroup = Group.build(element1, element2);
+    const newGroup = Group.from(element1, element2);
 
     const members = newGroup.getMembers();
 

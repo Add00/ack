@@ -4,7 +4,7 @@ import { TextPositioning } from './TextPositioning.js';
 export class Text extends TextPositioning {
   // Static
 
-  static build (content, x, y, fontStyle = new FontStyle()) {
+  static from (content, x, y, fontStyle = new FontStyle()) {
     return new Text(content, x, y, fontStyle);
   }
 

@@ -31,7 +31,7 @@ function formatNumbers (numbers) {
 export class Path extends Geometry {
   // Static
 
-  static build (relative = false) {
+  static from (relative = false) {
     return new Path(relative);
   }
 

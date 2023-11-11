@@ -13,7 +13,7 @@ function random (min, max) {
 
 // Helper function to generate a random polygon shard
 function generateShard (minX, maxX) {
-  return Polygon.build(random(minX, maxX), random(minX, CANVAS_HEIGHT + 25))
+  return Polygon.from(random(minX, maxX), random(minX, CANVAS_HEIGHT + 25))
     .setPoint(random(minX, maxX), random(minX, CANVAS_HEIGHT + 25))
     .setPoint(random(minX, maxX), random(minX, CANVAS_HEIGHT + 25))
     .setPoint(random(minX, maxX), random(minX, CANVAS_HEIGHT + 25));
@@ -80,5 +80,5 @@ function updateShards () {
 setInterval(updateShards, 1000);
 
 // Build the canvas and nest the groups
-const canvas = Canvas.build(svg);
+const canvas = Canvas.from(svg);
 canvas.nest(leftSide).nest(centreSide).nest(rightSide);

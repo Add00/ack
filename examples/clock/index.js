@@ -11,7 +11,7 @@ const digits = [];
 let x = 0;
 let y = -150;
 for (let i = 12; i > 0; i--) {
-  digits.push(Text.build(i, x, y));
+  digits.push(Text.from(i, x, y));
 
   const polar = EMath.cartesianToPolar(x, y);
   polar.angle -= Math.PI / 6;
@@ -21,16 +21,16 @@ for (let i = 12; i > 0; i--) {
   y = cart.y;
 }
 
-const hour = Line.build(0, 0, 0, 50)
+const hour = Line.from(0, 0, 0, 50)
   .setStrokeStyle(new StrokeStyle({ stroke: 'black' }));
 
-const min = Line.build(0, 0, 0, 100)
+const min = Line.from(0, 0, 0, 100)
   .setStrokeStyle(new StrokeStyle({ stroke: 'black' }));
 
-const sec = Line.build(0, 0, 0, 150)
+const sec = Line.from(0, 0, 0, 150)
   .setStrokeStyle(new StrokeStyle({ stroke: 'red' }));
 
-const face = Circle.build(0, 0, 150)
+const face = Circle.from(0, 0, 150)
   .setStrokeStyle(new StrokeStyle({ stroke: 'black' }))
   .setFillStyle(new FillStyle({ fillOpacity: 0 }));
 
@@ -54,7 +54,7 @@ setInterval(() => update(sec, 150, 'getSeconds'), 1000);
 setInterval(() => update(min, 100, 'getMinutes'), 60000);
 setInterval(() => update(hour, 50, 'getHours'), 3.6e+6);
 
-const canvas = Canvas.build(svg);
+const canvas = Canvas.from(svg);
 canvas
   .setViewBoxX(-250)
   .setViewBoxY(-250)

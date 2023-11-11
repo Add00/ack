@@ -5,7 +5,7 @@ const svg = document.getElementById('graph');
 
 const canvas = new Canvas(svg)
   .nest(
-    Polygon.build(50, 160)
+    Polygon.from(50, 160)
       .setPoint(55, 180)
       .setPoint(70, 180)
       .setPoint(60, 190)

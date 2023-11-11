@@ -12,15 +12,15 @@ const right = [];
 
 const digits = [];
 
-const display = Text.build('|', 20, 10);
+const display = Text.from('|', 20, 10);
 
 for (let index = 1; index < 10; index++) {
   const row = Math.floor((index - 1) / 3);
   const col = (index - 1) % 3;
 
-  const button = Group.build(
-    Text.build(index, 30 + 40 * col, 35 + 40 * row),
-    Rect.build(20 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
+  const button = Group.from(
+    Text.from(index, 30 + 40 * col, 35 + 40 * row),
+    Rect.from(20 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
       .setStrokeStyle(new StrokeStyle({ strokeWidth: 2 }))
       .setFillStyle(new FillStyle({ fillOpacity: 0 }))
       .onMouse.click(() => {
@@ -38,9 +38,9 @@ for (let index = 1; index < 2; index++) {
   const row = Math.floor((index - 1) / 3);
   const col = (index - 1) % 3;
 
-  const button = Group.build(
-    Text.build('+', 215 + 40 * col, 35 + 40 * row),
-    Rect.build(200 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
+  const button = Group.from(
+    Text.from('+', 215 + 40 * col, 35 + 40 * row),
+    Rect.from(200 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
       .setStrokeStyle(new StrokeStyle({ strokeWidth: 2 }))
       .setFillStyle(new FillStyle({ fillOpacity: 0 }))
       .onMouse.click(() => {
@@ -52,5 +52,5 @@ for (let index = 1; index < 2; index++) {
   symbols.push(button);
 }
 
-Canvas.build(svg)
+Canvas.from(svg)
   .nest(display, ...digits, ...symbols);

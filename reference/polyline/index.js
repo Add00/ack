@@ -5,7 +5,7 @@ const svg = document.getElementById('graph');
 
 const canvas = new Canvas(svg)
   .nest(
-    Polyline.build(60, 110)
+    Polyline.from(60, 110)
       .setPoint(65, 120)
       .setPoint(70, 115)
       .setPoint(75, 130)

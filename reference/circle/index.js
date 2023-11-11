@@ -10,9 +10,9 @@ const vector3Circle = document.getElementById('vector3-circle');
 const CANVAS_WIDTH = 100;
 const CANVAS_HEIGHT = 100;
 
-Canvas.build(standardCircle)
+Canvas.from(standardCircle)
   .nest(
-    Title.build('Circle built from constructor'),
+    Title.from('Circle built from constructor'),
     new Circle(
       CANVAS_WIDTH / 2,
       CANVAS_HEIGHT / 2,
@@ -20,10 +20,10 @@ Canvas.build(standardCircle)
     )
   );
 
-Canvas.build(diameterCircle)
+Canvas.from(diameterCircle)
   .nest(
-    Title.build('Circle built from diameter'),
-    Circle.buildFromDiameter(
+    Title.from('Circle built from diameter'),
+    Circle.fromDiameter(
       CANVAS_WIDTH / 2,
       CANVAS_HEIGHT / 2,
       25
@@ -36,8 +36,8 @@ const vector3 = new Vector3(
   25
 );
 
-Canvas.build(vector3Circle)
+Canvas.from(vector3Circle)
   .nest(
-    Title.build('Circle built from vector3'),
-    Circle.buildFromVector3(vector3)
+    Title.from('Circle built from vector3'),
+    Circle.fromVector3(vector3)
   );

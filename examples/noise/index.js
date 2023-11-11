@@ -14,7 +14,7 @@ const MAX_Y = 20;
 for (let x = MIN_X; x < MAX_X; x++) {
   for (let y = MIN_Y; y < MAX_Y; y++) {
     grid.push(
-      Rect.build(10 + 10 * x, 10 + 10 * y, 8, 8)
+      Rect.from(10 + 10 * x, 10 + 10 * y, 8, 8)
         .setFillStyle(new FillStyle({
           fillOpacity: EMath.remap(
             Noise.simplex2(x / 10, y / 10),
@@ -25,5 +25,5 @@ for (let x = MIN_X; x < MAX_X; x++) {
   }
 }
 
-const canvas = Canvas.build(svg);
+const canvas = Canvas.from(svg);
 canvas.nest(...grid);

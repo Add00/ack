@@ -4,7 +4,7 @@ import { FontStyle } from '../styles/FontStyle.js';
 export class Title extends TextContent {
   // Static
 
-  static build (content, x = 0, y = 0) {
+  static from (content, x = 0, y = 0) {
     return new Title(content, x, y);
   }
 
