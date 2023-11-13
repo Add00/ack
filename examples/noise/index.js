@@ -11,6 +11,8 @@ const MAX_X = 20;
 const MIN_Y = 0;
 const MAX_Y = 20;
 
+Noise.seed(Math.random());
+
 for (let x = MIN_X; x < MAX_X; x++) {
   for (let y = MIN_Y; y < MAX_Y; y++) {
     grid.push(

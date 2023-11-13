@@ -9,38 +9,28 @@ export class Polyline extends Poly {
   // Static
 
   /**
-   * Create a Polyline instance with the provided coordinates.
+   * Create a Polyline instance with the provided points.
    *
-   * @param {number} x - The x-coordinate of the initial point.
-   * @param {number} y - The y-coordinate of the initial point.
+   * @param {...DOMPoint} points - The DOMPoints to add to the Polyline.
    */
-  static from (x, y) {
-    return new Polyline(x, y);
+  static from (...points) {
+    return new Polyline(...points);
   }
 
   /**
    * Create a Polyline instance.
    *
-   * @param {number} x - The x-coordinate of the initial point.
-   * @param {number} y - The y-coordinate of the initial point.
+   * @param {...DOMPoint} points - The DOMPoints to add to the Polyline.
    */
-  constructor (x, y) {
+  constructor (...points) {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'polyline'));
 
-    this.setX(x);
-    this.setY(y);
     super.clear();
-    this.setPoint(x, y);
+    super.addPoint(...points);
   }
 
   // Accessors
 
-  /**
-   * Set the x-coordinate of the top-left corner.
-   *
-   * @param {number} x - The new x-coordinate.
-   * @returns {Rect} The current Rect object.
-   */
   setX (x) {
     super._set('x', x);
 
