@@ -17,25 +17,22 @@ const wave = Polygon.from(
 let cycles = 0;
 
 setInterval(() => {
-  const height = Noise.simplex2(
-    EMath.remap(SIDE / 2, 0, SIDE, -1, 1),
-    EMath.remap(cycles, 0, 500, -1, 1)
-  );
+  wave.updatePoints(
+    (point, index) => {
+      const height = Noise.simplex2(
+        EMath.remap(index, 0, wave.getPoints().length - 2, -1, 1),
+        EMath.remap(cycles, 0, 100, -1, 1)
+      );
 
-  const newPoint = new DOMPoint(
-    SIDE / 2,
-    EMath.remap(height, -1, 1, 150, 350)
-  );
-
-  wave.updatePointAt(4, (oldPoint) => {
-    oldPoint.y = newPoint.y;
-  });
-
-  console.log(height, EMath.remap(height, 0, 1, 150, 350));
+      point.y = EMath.remap(height, -1, 1, 150, 350);
+    },
+    (point, index) => {
+      return index > 1 && index < 7;
+    });
 
   cycles += 1;
 
-  if (cycles > 500) cycles = 0;
+  if (cycles > 100) cycles = 0;
 }, 500);
 
 const canvas = Canvas.from(document.getElementById('canvas'));

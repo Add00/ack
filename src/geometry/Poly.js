@@ -1,3 +1,4 @@
+/* global DOMPoint */
 import { Geometry } from './Geometry.js';
 
 /**
@@ -33,7 +34,7 @@ export class Poly extends Geometry {
    * Add points to the polygon.
    *
    * @param {...DOMPoint} points - The DOMPoints to add to the polygon.
-   * @returns {Poly} - The current instance.
+   * @returns {Poly} The current instance.
    */
   addPoint (...points) {
     const currentPoints = this.getPoints();
@@ -76,13 +77,34 @@ export class Poly extends Geometry {
    * Update the point at the specified index using the provided function.
    *
    * @param {number} index - The index of the point to update.
-   * @param {function(DOMPoint)} fn - The function to apply to the point.
-   * @returns {Poly} - The current instance.
+   * @param {function(DOMPoint): void} updater - The function which will transform the point.
+   * @returns {Poly} The current instance.
    */
-  updatePointAt (index, fn) {
+  updatePointAt (index, updater) {
     const points = this.getPoints();
 
-    fn(points.at(index));
+    updater(points.at(index));
+
+    this.#setPointsAsString(points);
+
+    return this;
+  }
+
+  /**
+   * Updates all the points on the shape.
+   *
+   * @param {function(DOMPoint, number): void} updater - The function which will transform the point.
+   * @param {function(DOMPoint, number): boolean} filter - The function to check if the point should be updated.
+   * @returns {Poly} The current instance.
+   */
+  updatePoints (updater, filter = () => true) {
+    const points = this.getPoints();
+
+    points
+      .filter(filter)
+      .forEach((point, index) => {
+        updater(point, index);
+      });
 
     this.#setPointsAsString(points);
 
@@ -93,7 +115,7 @@ export class Poly extends Geometry {
    * Remove a point from the polygon at the specified index.
    *
    * @param {number} index - The index of the point to remove.
-   * @returns {DOMPoint|undefined} - The removed point as a DOMPoint, or undefined if the index is out of bounds.
+   * @returns {DOMPoint|undefined} The removed point as a DOMPoint, or undefined if the index is out of bounds.
    */
   removePointAt (index) {
     const points = this.getPoints();
@@ -106,7 +128,7 @@ export class Poly extends Geometry {
   /**
    * Clear all points from the polygon.
    *
-   * @returns {Poly} - The current instance.
+   * @returns {Poly} The current instance.
    */
   clear () {
     super._set('points', '');

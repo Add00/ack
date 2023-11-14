@@ -38,7 +38,7 @@ export class Polygon extends Poly {
    * @returns {Polygon} A new Polygon object with the same properties as the original.
    */
   clone () {
-    return new Polygon();
+    return new Polygon(...super.getPoints());
   }
 
   /**
