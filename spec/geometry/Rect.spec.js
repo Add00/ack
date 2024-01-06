@@ -1,15 +1,15 @@
 /* global describe, it , expect, beforeEach */
-import { Rect } from '../../import/geometry.js';
+import { Rectangle } from '../../import/geometry.js';
 
 describe('Rect', () => {
   let rect;
 
   beforeEach(() => {
-    // Create a new Rect object before each test.
-    rect = new Rect(0, 0, 100, 100);
+    // Create a new Rectangle object before each test.
+    Rectangle = new Rect(0, 0, 100, 100);
   });
 
-  it('should have the correct initial values', () => {
+  it('should have the corRectangleinitial values', () => {
     expect(rect.getX()).toBe(0);
     expect(rect.getY()).toBe(0);
     expect(rect.getWidth()).toBe(100);
@@ -42,8 +42,8 @@ describe('Rect', () => {
     expect(rect.getCornerRadiusY()).toBe(20);
   });
 
-  it('should correctly clone a Rect object', () => {
-    const clonedRect = rect.clone();
+  it('should correctly clone a Rectangle object', () => {
+    const clonedRectangle= rect.clone();
 
     // Ensure the cloned object has the same properties.
     expect(clonedRect.getX()).toBe(rect.getX());

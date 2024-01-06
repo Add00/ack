@@ -3,6 +3,7 @@ import { Canvas, Noise, ExtendedMath as EMath } from '../../import/general.js';
 import { Polygon } from '../../import/geometry.js';
 
 const SIDE = 500;
+const ANIMATION_DURATION = 100;
 
 const wave = Polygon.from(
   new DOMPoint(0, SIDE), // 0
@@ -16,24 +17,30 @@ const wave = Polygon.from(
 
 let cycles = 0;
 
-setInterval(() => {
-  wave.updatePoints(
-    (point, index) => {
-      const height = Noise.simplex2(
-        EMath.remap(index, 0, wave.getPoints().length - 2, -1, 1),
-        EMath.remap(cycles, 0, 100, -1, 1)
-      );
+function updateWavePoints (point, index) {
+  const height = Noise.simplex2(
+    EMath.remap(index, 0, wave.getPoints().length - 2, -1, 1),
+    EMath.remap(cycles, 0, ANIMATION_DURATION, -1, 1)
+  );
+  point.y = EMath.remap(height, -1, 1, 150, 350);
+}
 
-      point.y = EMath.remap(height, -1, 1, 150, 350);
-    },
-    (point, index) => {
-      return index > 1 && index < 7;
-    });
+function isInteriorPoint (point, index) {
+  return index > 1 && index < 7;
+}
+
+function animateWave () {
+  wave.updatePoints(updateWavePoints, isInteriorPoint);
 
   cycles += 1;
+  if (cycles > ANIMATION_DURATION) {
+    cycles = 0;
+  }
 
-  if (cycles > 100) cycles = 0;
-}, 500);
+  window.requestAnimationFrame(animateWave);
+}
 
-const canvas = Canvas.from(document.getElementById('canvas'));
+const canvas = Canvas.wrap(document.getElementById('canvas'));
 canvas.nest(wave);
+
+animateWave();

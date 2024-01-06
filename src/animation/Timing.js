@@ -1,3 +1,1 @@
-class Timing {
-
-}
+export class Timing {}

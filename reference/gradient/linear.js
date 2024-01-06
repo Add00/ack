@@ -19,5 +19,5 @@ const define = new Define()
 const circle = new Circle(50, 50, 25)
   .setFillStyle(new FillStyle({ fill: `url(#${gradient.getID()})` }));
 
-new Canvas(svg)
+Canvas.wrap(svg)
   .nest(define, circle);

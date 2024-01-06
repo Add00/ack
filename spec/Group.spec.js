@@ -1,6 +1,6 @@
 /* global describe, it , expect, beforeEach */
 import { Group } from '../src/Group.js';
-import { Rect } from '../src/geometry/Rect.js';
+import { Rectangle } from '../src/geometry/Rect.js';
 
 describe('Group', () => {
   let group;

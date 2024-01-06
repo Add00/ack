@@ -4,6 +4,6 @@ import { Line } from '../src/geometry/Line.js';
 import { Path } from '../src/geometry/Path.js';
 import { Polygon } from '../src/geometry/Polygon.js';
 import { Polyline } from '../src/geometry/Polyline.js';
-import { Rect } from '../src/geometry/Rect.js';
+import { Rectangle } from '../src/geometry/Rectangle.js';
 
-export { Circle, Ellipse, Line, Path, Polygon, Polyline, Rect };
+export { Circle, Ellipse, Line, Path, Polygon, Polyline, Rectangle };

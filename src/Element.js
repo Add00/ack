@@ -1,3 +1,5 @@
+/* global SVGElement */
+
 /**
  * A generator function that yields unique IDs based on the provided tag names.
  * The function generates IDs in the format "tagname-1", "tagname-2", and so on.
@@ -106,10 +108,12 @@ export class Element {
   /**
    * Creates a new Element instance.
    *
-   * @param {SVGElement} element - The underlying SVG element to wrap.
+   * @param {string|SVGElement} element - The underlying SVG element to make.
    */
   constructor (element) {
-    this.#element = element;
+    this.#element = element instanceof SVGElement
+      ? element
+      : document.createElementNS('http://www.w3.org/2000/svg', element);
 
     // Generate and set 'id' attribute
     if (!this.#element.hasAttribute('id')) {

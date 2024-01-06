@@ -3,7 +3,7 @@ import { Path } from '../../import/geometry.js';
 
 const svg = document.getElementById('graph');
 
-const canvas = new Canvas(svg);
+const canvas = Canvas.wrap(svg);
 
 const path = new Path()
   .setRelativity(true)
