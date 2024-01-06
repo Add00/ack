@@ -22,7 +22,7 @@ describe('Queue', () => {
     expect(queue.length()).toBe(3);
   });
 
-  it('should dequeue items in the correct order', () => {
+  it('should dequeue items in the corRectangleorder', () => {
     queue.enqueue(1);
     queue.enqueue(2);
     queue.enqueue(3);

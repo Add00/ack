@@ -1,16 +1,43 @@
-import { Geometry } from '../src/geometry/Geometry.js';
+import { Quadrilateral } from '../src/geometry/Quadrilateral.js';
 
 /**
- * Represents an SVG element that operates as an OOP interface.
+ *
+ *
  * @extends Geometry
  */
-export class Canvas extends Geometry {
-  static from (svg) {
+export class Canvas extends Quadrilateral {
+  // Static
+
+  /**
+   * Creates a new Canvas instance.
+   *
+   * @param {number} x - The x-coordinate of the canvas.
+   * @param {number} y - The y-coordinate of the canvas.
+   * @param {number} width - The width of the canvas.
+   * @param {number} height - The height of the canvas.
+   * @param {Array<number>} viewBox - The initial viewBox of the canvas.
+   */
+  static from (x, y, width, height, viewBox = [x, y, width, height]) {
+    return new Canvas(x, y, width, height, viewBox);
+  }
+
+  /**
+   * Creates a new Canvas instance from an object.
+   *
+   * @param {object} svg - An object containing x, y, width, height, and viewBox properties.
+   * @returns {Canvas} The new Canvas instance.
+   */
+  static parse ({ x, y, width, height, viewBox = [x, y, width, height] }) {
+    return new Canvas(x, y, width, height, viewBox);
+  }
+
+  static wrap (svg) {
     return new Canvas(svg);
   }
 
   /**
    * The internal representation of the canvas viewBox.
+   *
    * [0] - x
    * [1] - y
    * [2] - width
@@ -22,6 +49,7 @@ export class Canvas extends Geometry {
 
   /**
    * Updates the viewBox property of the canvas.
+   *
    * @private
    */
   #updateViewBox () {
@@ -30,16 +58,31 @@ export class Canvas extends Geometry {
 
   /**
    * Creates a new Canvas instance.
-   * @param {SVGElement} svg - The SVG element to create the canvas from.
+   *
+   * @param {number} x - The x-coordinate of the canvas.
+   * @param {number} y - The y-coordinate of the canvas.
+   * @param {number} width - The width of the canvas.
+   * @param {number} height - The height of the canvas.
+   * @param {Array<number>} [viewBox=[x, y, width, height]] - The initial viewBox of the canvas. Default is [x, y, width, height].
    */
-  constructor (svg) {
-    super(svg);
+  constructor (x, y, width, height, viewBox = [x, y, width, height]) {
+    if (typeof x === 'number') {
+      super('svg');
 
-    this.#viewBox = super._getAsString('viewBox').split(' ').map(Number);
+      super.setX(x);
+      super.setY(y);
+      super.setWidth(width);
+      super.setHeight(height);
+
+      this.#viewBox = viewBox;
+    } else {
+      super(x);
+    }
   }
 
   /**
    * Sets the x-coordinate of the canvas.
+   *
    * @param {number} x - The new x-coordinate.
    * @returns {Canvas} The Canvas instance for method chaining.
    */
@@ -52,6 +95,7 @@ export class Canvas extends Geometry {
 
   /**
    * Gets the x-coordinate of the canvas.
+   *
    * @returns {number} The x-coordinate of the canvas.
    */
   getViewBoxX () {
@@ -60,6 +104,7 @@ export class Canvas extends Geometry {
 
   /**
    * Sets the y-coordinate of the canvas.
+   *
    * @param {number} y - The new y-coordinate.
    * @returns {Canvas} The Canvas instance for method chaining.
    */
@@ -72,6 +117,7 @@ export class Canvas extends Geometry {
 
   /**
    * Gets the y-coordinate of the canvas.
+   *
    * @returns {number} The y-coordinate of the canvas.
    */
   getViewBoxY () {
@@ -80,6 +126,7 @@ export class Canvas extends Geometry {
 
   /**
    * Sets the width of the canvas.
+   *
    * @param {number} width - The new width.
    * @throws {Error} Throws an error if the width is not a positive number.
    * @returns {Canvas} The Canvas instance for method chaining.
@@ -97,6 +144,7 @@ export class Canvas extends Geometry {
 
   /**
    * Gets the width of the canvas.
+   *
    * @returns {number} The width of the canvas.
    */
   getViewBoxWidth () {
@@ -105,6 +153,7 @@ export class Canvas extends Geometry {
 
   /**
    * Sets the height of the canvas.
+   *
    * @param {number} height - The new height.
    * @throws {Error} Throws an error if the height is not a positive number.
    * @returns {Canvas} The Canvas instance for method chaining.
@@ -122,6 +171,7 @@ export class Canvas extends Geometry {
 
   /**
    * Gets the height of the canvas.
+   *
    * @returns {number} The height of the canvas.
    */
   getViewBoxHeight () {

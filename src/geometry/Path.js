@@ -83,7 +83,7 @@ export class Path extends Geometry {
    * @returns {string} The path commands as a string.
    */
   getCommands () {
-    return super._get('d');
+    return super._getAsString('d');
   }
 
   /**

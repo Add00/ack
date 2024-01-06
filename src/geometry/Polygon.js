@@ -8,31 +8,25 @@ import { Poly } from './Poly.js';
 export class Polygon extends Poly {
   // Static
 
-  // static parse ({ x, y }) {
-  //   return new Polygon(x, y);
-  // }
-
   /**
-   * Create a Polygon instance with the provided coordinates.
+   * Create a Polygon instance with the provided points.
    *
-   * @param {number} x - The x-coordinate of the initial point.
-   * @param {number} y - The y-coordinate of the initial point.
+   * @param {...DOMPoint} points - The DOMPoints to add to the polygon.
    */
-  static from (x, y) {
-    return new Polygon(x, y);
+  static from (...points) {
+    return new Polygon(...points);
   }
 
   /**
    * Create a Polygon instance.
    *
-   * @param {number} x - The x-coordinate of the initial point.
-   * @param {number} y - The y-coordinate of the initial point.
+   * @param {...DOMPoint} points - The DOMPoints to add to the polygon.
    */
-  constructor (x, y) {
+  constructor (...points) {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'polygon'));
 
     super.clear();
-    this.setPoint(x, y);
+    this.addPoint(...points);
   }
 
   // Methods
@@ -44,7 +38,7 @@ export class Polygon extends Poly {
    * @returns {Polygon} A new Polygon object with the same properties as the original.
    */
   clone () {
-    return new Polygon();
+    return new Polygon(...super.getPoints());
   }
 
   /**

@@ -12,8 +12,8 @@ export class StrokeStyle extends Style {
      * @param {color} [options.stroke='black'] - The stroke color.
      * @param {number} [options.strokeWidth=1] - The stroke width.
      * @param {number} [options.strokeOpacity=1] - The stroke opacity.
-     * @param {string} [options.strokeLinecap='butt'] - The stroke linecap style ('butt', 'square', or 'round').
-     * @param {string} [options.strokeLinejoin='miter'] - The stroke linejoin style ('miter', 'round', or 'bevel').
+     * @param {'butt' | 'square' | 'round'} [options.strokeLinecap='butt'] - The stroke linecap style ('butt', 'square', or 'round').
+     * @param {'miter' | 'round' | 'bevel'} [options.strokeLinejoin='miter'] - The stroke linejoin style ('miter', 'round', or 'bevel').
      * @param {string} [options.strokeDasharray=''] - The stroke dash array pattern.
      */
   constructor ({
@@ -27,7 +27,7 @@ export class StrokeStyle extends Style {
     super();
     this.stroke = stroke;
     this.strokeWidth = strokeWidth;
-    this.strokeOpacity - strokeOpacity;
+    this.strokeOpacity = strokeOpacity;
     this.strokeLinecap = strokeLinecap;
     this.strokeLinejoin = strokeLinejoin;
     this.strokeDasharray = strokeDasharray;

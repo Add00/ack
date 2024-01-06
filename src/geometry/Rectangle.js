@@ -1,4 +1,4 @@
-import { Geometry } from './Geometry.js';
+import { Quadrilateral } from './Quadrilateral.js';
 import { Vector2 } from '../containers/vector/Vector2.js';
 
 /**
@@ -6,21 +6,21 @@ import { Vector2 } from '../containers/vector/Vector2.js';
  *
  * @extends {Geometry}
  */
-export class Rect extends Geometry {
+export class Rectangle extends Quadrilateral {
   // Static
 
   /**
    * Parse an object into a Rect.
    *
-   * @param {Object} rect - An object with properties (x, y, width, height, rx, ry).
-   * @returns {Rect} A new Rect object.
+   * @param {Object} Rectangle- An object with properties (x, y, width, height, rx, ry).
+   * @returns {Rectangle} A new Rectangle .
    */
   static parse ({ x, y, width, height, rx = 0, ry = 0 }) {
-    return new Rect(x, y, width, height, rx, ry);
+    return new Rectangle(x, y, width, height, rx, ry);
   }
 
   /**
-   * Build a Rect object with specified properties.
+   * Build a Rectangle  with specified properties.
    *
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
@@ -28,22 +28,22 @@ export class Rect extends Geometry {
    * @param {number} height - The height of the rectangle.
    * @param {number} [rx=0] - The x-axis radius of the rectangle's corners.
    * @param {number} [ry=0] - The y-axis radius of the rectangle's corners.
-   * @returns {Rect} A new Rect object.
+   * @returns {Rectangle} A new Rectangle .
    */
   static from (x, y, width, height, rx = 0, ry = 0) {
-    return new Rect(x, y, width, height, rx, ry);
+    return new Rectangle(x, y, width, height, rx, ry);
   }
 
   /**
-   * Create a Rect object from position, size, and corner Vector2.
+   * Create a Rectangle  from position, size, and corner Vector2.
    *
    * @param {Vector2} position - The position vector.
    * @param {Vector2} size - The size vector.
    * @param {Vector2} [corner=new Vector2(0, 0)] - The corner vector.
-   * @returns {Rect} A new Rect object.
+   * @returns {Rectangle} A new Rectangle .
    */
   static fromVector2 (position, size, corner = new Vector2(0, 0)) {
-    return new Rect(
+    return new Rectangle(
       position.getX(),
       position.getY(),
       size.getX(),
@@ -59,14 +59,14 @@ export class Rect extends Geometry {
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
    * @param {number} s - The side length of the square.
-   * @returns {Rect} A new Rect object in the shape of a square.
+   * @returns {Rectangle} A new Rectangle  in the shape of a square.
    */
   static fromSquare (x, y, s) {
-    return new Rect(x, y, s, s, 0, 0);
+    return new Rectangle(x, y, s, s, 0, 0);
   }
 
   /**
-   * Create a new Rect object.
+   * Create a new Rectangle .
    *
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
@@ -76,12 +76,12 @@ export class Rect extends Geometry {
    * @param {number} [ry=0] - The y-axis radius of the rectangle's corners.
    */
   constructor (x, y, width, height, rx = 0, ry = 0) {
-    super(document.createElementNS('http://www.w3.org/2000/svg', 'rect'));
+    super('rect');
 
-    this.setX(x);
-    this.setY(y);
-    this.setWidth(width);
-    this.setHeight(height);
+    super.setX(x);
+    super.setY(y);
+    super.setWidth(width);
+    super.setHeight(height);
     this.setCornerRadiusX(rx);
     this.setCornerRadiusY(ry);
   }
@@ -89,94 +89,10 @@ export class Rect extends Geometry {
   // Accessors
 
   /**
-   * Set the x-coordinate of the top-left corner.
-   *
-   * @param {number} x - The new x-coordinate.
-   * @returns {Rect} The current Rect object.
-   */
-  setX (x) {
-    super._set('x', x);
-
-    return this;
-  }
-
-  /**
-   * Get the x-coordinate of the top-left corner.
-   *
-   * @returns {number} The x-coordinate.
-   */
-  getX () {
-    return super._getAsNumber('x');
-  }
-
-  /**
-   * Set the y-coordinate of the top-left corner.
-   *
-   * @param {number} y - The new y-coordinate.
-   * @returns {Rect} The current Rect object.
-   */
-  setY (y) {
-    super._set('y', y);
-
-    return this;
-  }
-
-  /**
-   * Get the y-coordinate of the top-left corner.
-   *
-   * @returns {number} The y-coordinate.
-   */
-  getY () {
-    return super._getAsNumber('y');
-  }
-
-  /**
-   * Set the width of the rectangle.
-   *
-   * @param {number} width - The new width.
-   * @returns {Rect} The current Rect object.
-   */
-  setWidth (width) {
-    super._set('width', width);
-
-    return this;
-  }
-
-  /**
-   * Get the width of the rectangle.
-   *
-   * @returns {number} The width.
-   */
-  getWidth () {
-    return super._getAsNumber('width');
-  }
-
-  /**
-   * Set the height of the rectangle.
-   *
-   * @param {number} height - The new height.
-   * @returns {Rect} The current Rect object.
-   */
-  setHeight (height) {
-    super._set('height', height);
-
-    return this;
-  }
-
-  /**
-   * Get the height of the rectangle.
-   *
-   * @returns {number} The height.
-   */
-  getHeight () {
-    return super._getAsNumber('height');
-  }
-
-  /**
    * Set the x-axis radius of the rectangle's corners.
    *
    * @param {number} rx - The new x-axis radius.
-   * @returns {Rect} The current Rect object.
+   * @returns {Rectangle} The current Rectangle .
    */
   setCornerRadiusX (rx) {
     super._set('rx', rx);
@@ -197,7 +113,7 @@ export class Rect extends Geometry {
    * Set the y-axis radius of the rectangle's corners.
    *
    * @param {number} ry - The new y-axis radius.
-   * @returns {Rect} The current Rect object.
+   * @returns {Rectangle} The current Rectangle .
    */
   setCornerRadiusY (ry) {
     super._set('ry', ry);
@@ -218,11 +134,11 @@ export class Rect extends Geometry {
    * Set the size of the rectangle using a Vector2.
    *
    * @param {Vector2} size - The new size as a Vector2.
-   * @returns {Rect} The current Rect object.
+   * @returns {Rectangle} The current Rectangle .
    */
   setSize (size) {
-    super._set('width', size.getX());
-    super._set('height', size.getY());
+    super.setWidth(size.getX());
+    super.setHeight(size.getY());
 
     return this;
   }
@@ -234,8 +150,8 @@ export class Rect extends Geometry {
    */
   getSize () {
     return new Vector2(
-      super._getAsNumber('width'),
-      super._getAsNumber('height')
+      super.getWidth(),
+      super.getHeight()
     );
   }
 
@@ -243,11 +159,11 @@ export class Rect extends Geometry {
    * Set the position of the rectangle using a Vector2.
    *
    * @param {Vector2} position - The new position as a Vector2.
-   * @returns {Rect} The current Rect object.
+   * @returns {Rectangle} The current Rectangle .
    */
   setPosition (position) {
-    super._set('x', position.getX());
-    super._set('y', position.getY());
+    super.setX(position.getX());
+    super.setY(position.getY());
 
     return this;
   }
@@ -259,21 +175,21 @@ export class Rect extends Geometry {
    */
   getPosition () {
     return new Vector2(
-      super._getAsNumber('x'),
-      super._getAsNumber('y')
+      super.getX(),
+      super.getY()
     );
   }
 
   // Methods
 
   /**
-   * Create a deep copy of the current Rect object.
+   * Create a deep copy of the current Rectangle .
    *
    * @override
-   * @returns {Rect} A new Rect object with the same properties.
+   * @returns {Rectangle} A new Rectangle  with the same properties.
    */
   clone () {
-    return new Rect(
+    return new Rectangle(
       this.getX(),
       this.getY(),
       this.getWidth(),
@@ -286,7 +202,7 @@ export class Rect extends Geometry {
   /**
    * Check if this rectangle is in collision with another rectangle.
    *
-   * @param {Rect} other - The other rectangle to check for collision.
+   * @param {Rectangle} other - The other rectangle to check for collision.
    * @returns {boolean} True if there is a collision, otherwise false.
    */
   isColliding (other) {
