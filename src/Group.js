@@ -25,7 +25,7 @@ export class Group extends Geometry {
    * @returns {Group} A new Group instance with the nested elements.
    */
   static from (...elements) {
-    return this.group(...elements);
+    return Group.group(...elements);
   }
 
   #members;
