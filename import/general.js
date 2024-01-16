@@ -6,5 +6,6 @@ import { Graphic } from '../src/Graphic.js';
 import { Group } from '../src/Group.js';
 import { Noise } from '../src/Noise.js';
 import { Transformations } from '../src/Transformations.js';
+import { Image } from '../src/Image.js';
 
-export { Canvas, Define, Element, ExtendedMath, Graphic, Group, Noise, Transformations };
+export { Canvas, Define, Element, ExtendedMath, Graphic, Group, Noise, Transformations, Image };
