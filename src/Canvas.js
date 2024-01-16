@@ -1,7 +1,7 @@
 import { Quadrilateral } from '../src/geometry/Quadrilateral.js';
 
 /**
- *
+ * Wrapper class for the svg element. Provides access to the underlying features of the svg.
  *
  * @extends Geometry
  */
