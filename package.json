@@ -13,6 +13,7 @@
   "scripts": {
     "coverage": "nyc jasmine-browser-runner runSpecs",
     "test": "jasmine-browser-runner serve",
+    "test-cli": "jasmine-browser-runner runSpecs",
     "lint": "semistandard --env jasmine",
     "document": "jsdoc -r -d docs/ src",
     "format": "semistandard --fix"
