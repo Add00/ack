@@ -25,4 +25,4 @@ jobs:
       run: npm install
 
     - name: Run Jasmine tests
-      run: npm test-cli
+      run: npm run test-cli
