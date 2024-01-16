@@ -1,5 +1,5 @@
 /* global describe, it , expect, beforeEach */
-import { ExtendedMath } from '../src/ExtendedMath.js';
+import { ExtendedMath } from '../import/general.js';
 
 describe('ExtendedMath', function () {
   let result;

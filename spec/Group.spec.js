@@ -1,6 +1,6 @@
 /* global describe, it , expect, beforeEach */
 import { Group } from '../src/Group.js';
-import { Rectangle } from '../src/geometry/Rect.js';
+import { Rectangle } from '../src/geometry/Rectangle.js';
 
 describe('Group', () => {
   let group;
@@ -18,8 +18,8 @@ describe('Group', () => {
   });
 
   it('should nest elements correctly', () => {
-    const element1 = new Rect();
-    const element2 = new Rect();
+    const element1 = new Rectangle();
+    const element2 = new Rectangle();
 
     group.nest(element1, element2);
 
@@ -30,8 +30,8 @@ describe('Group', () => {
   });
 
   it('should iterate through its members', () => {
-    const element1 = new Rect();
-    const element2 = new Rect();
+    const element1 = new Rectangle();
+    const element2 = new Rectangle();
 
     group.nest(element1, element2);
 
@@ -42,8 +42,8 @@ describe('Group', () => {
   });
 
   it('should set and get members using setMembers and getMembers', () => {
-    const element1 = new Rect();
-    const element2 = new Rect();
+    const element1 = new Rectangle();
+    const element2 = new Rectangle();
 
     group.setMembers(element1, element2);
 
@@ -54,8 +54,8 @@ describe('Group', () => {
   });
 
   it('should create a new Group instance using group method', () => {
-    const element1 = new Rect();
-    const element2 = new Rect();
+    const element1 = new Rectangle();
+    const element2 = new Rectangle();
 
     const newGroup = Group.group(element1, element2);
 
@@ -66,8 +66,8 @@ describe('Group', () => {
   });
 
   it('should create a new Group instance using build method', () => {
-    const element1 = new Rect();
-    const element2 = new Rect();
+    const element1 = new Rectangle();
+    const element2 = new Rectangle();
 
     const newGroup = Group.from(element1, element2);
 

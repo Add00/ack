@@ -12,15 +12,15 @@ export class Rectangle extends Quadrilateral {
   /**
    * Parse an object into a Rect.
    *
-   * @param {Object} Rectangle- An object with properties (x, y, width, height, rx, ry).
-   * @returns {Rectangle} A new Rectangle .
+   * @param {Object} Rectangle - An object with properties (x, y, width, height, rx, ry).
+   * @returns {Rectangle} A new Rectangle.
    */
   static parse ({ x, y, width, height, rx = 0, ry = 0 }) {
     return new Rectangle(x, y, width, height, rx, ry);
   }
 
   /**
-   * Build a Rectangle  with specified properties.
+   * Build a Rectangle with specified properties.
    *
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
@@ -28,19 +28,19 @@ export class Rectangle extends Quadrilateral {
    * @param {number} height - The height of the rectangle.
    * @param {number} [rx=0] - The x-axis radius of the rectangle's corners.
    * @param {number} [ry=0] - The y-axis radius of the rectangle's corners.
-   * @returns {Rectangle} A new Rectangle .
+   * @returns {Rectangle} A new Rectangle.
    */
   static from (x, y, width, height, rx = 0, ry = 0) {
     return new Rectangle(x, y, width, height, rx, ry);
   }
 
   /**
-   * Create a Rectangle  from position, size, and corner Vector2.
+   * Create a Rectangle from position, size, and corner Vector2.
    *
    * @param {Vector2} position - The position vector.
    * @param {Vector2} size - The size vector.
    * @param {Vector2} [corner=new Vector2(0, 0)] - The corner vector.
-   * @returns {Rectangle} A new Rectangle .
+   * @returns {Rectangle} A new Rectangle.
    */
   static fromVector2 (position, size, corner = new Vector2(0, 0)) {
     return new Rectangle(
@@ -59,14 +59,14 @@ export class Rectangle extends Quadrilateral {
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
    * @param {number} s - The side length of the square.
-   * @returns {Rectangle} A new Rectangle  in the shape of a square.
+   * @returns {Rectangle} A new Rectangle in the shape of a square.
    */
   static fromSquare (x, y, s) {
     return new Rectangle(x, y, s, s, 0, 0);
   }
 
   /**
-   * Create a new Rectangle .
+   * Create a new Rectangle.
    *
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
@@ -92,7 +92,7 @@ export class Rectangle extends Quadrilateral {
    * Set the x-axis radius of the rectangle's corners.
    *
    * @param {number} rx - The new x-axis radius.
-   * @returns {Rectangle} The current Rectangle .
+   * @returns {Rectangle} The current Rectangle.
    */
   setCornerRadiusX (rx) {
     super._set('rx', rx);
@@ -113,7 +113,7 @@ export class Rectangle extends Quadrilateral {
    * Set the y-axis radius of the rectangle's corners.
    *
    * @param {number} ry - The new y-axis radius.
-   * @returns {Rectangle} The current Rectangle .
+   * @returns {Rectangle} The current Rectangle.
    */
   setCornerRadiusY (ry) {
     super._set('ry', ry);
@@ -134,7 +134,7 @@ export class Rectangle extends Quadrilateral {
    * Set the size of the rectangle using a Vector2.
    *
    * @param {Vector2} size - The new size as a Vector2.
-   * @returns {Rectangle} The current Rectangle .
+   * @returns {Rectangle} The current Rectangle.
    */
   setSize (size) {
     super.setWidth(size.getX());
@@ -159,7 +159,7 @@ export class Rectangle extends Quadrilateral {
    * Set the position of the rectangle using a Vector2.
    *
    * @param {Vector2} position - The new position as a Vector2.
-   * @returns {Rectangle} The current Rectangle .
+   * @returns {Rectangle} The current Rectangle.
    */
   setPosition (position) {
     super.setX(position.getX());
@@ -183,10 +183,10 @@ export class Rectangle extends Quadrilateral {
   // Methods
 
   /**
-   * Create a deep copy of the current Rectangle .
+   * Create a deep copy of the current Rectangle.
    *
    * @override
-   * @returns {Rectangle} A new Rectangle  with the same properties.
+   * @returns {Rectangle} A new Rectangle with the same properties.
    */
   clone () {
     return new Rectangle(

@@ -4,53 +4,97 @@ import { Canvas } from '../../src/Canvas.js';
 import { Rectangle } from '../../import/geometry.js';
 import { FillStyle, StrokeStyle } from '../../import/styles.js';
 
+const SIZE = 50;
 const svg = document.getElementById('graph');
 
-const equation = [];
 const left = [];
 const right = [];
+let side = false;
+let result = 0;
 
-const digits = [];
+const display = Text.from(result, 50, 210);
 
-const display = Text.from('|', 20, 10);
-
-for (let index = 1; index < 10; index++) {
-  const row = Math.floor((index - 1) / 3);
-  const col = (index - 1) % 3;
-
+function buttonBuilder (x, y, symbol) {
   const button = Group.from(
-    Text.from(index, 30 + 40 * col, 35 + 40 * row),
-    Rectangle.from(20 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
-      .setStrokeStyle(new StrokeStyle({ strokeWidth: 2 }))
-      .setFillStyle(new FillStyle({ fillOpacity: 0 }))
-      .onMouse.click(() => {
-        left.push(index);
-        display.setContent(left.join(''));
-      })
+    Rectangle.from(x, y, SIZE - 5, SIZE - 5, 5, 5)
+      .setStrokeStyle(new StrokeStyle({ stroke: 'black' }))
+      .setFillStyle(new FillStyle({ fill: 'transparent' })),
+    Text.from(symbol, (x - 3) + SIZE / 2, (y + 3) + SIZE / 2)
   );
 
-  digits.push(button);
+  button.onMouse.enter(() => {
+    button.getMembers().at(0).setFillStyle(new FillStyle({ fill: 'black' }));
+    button.getMembers().at(1).setStrokeStyle(new StrokeStyle({ stroke: 'white' }));
+  });
+
+  button.onMouse.leave(() => {
+    button.getMembers().at(0).setFillStyle(new FillStyle({ fill: 'transparent' }));
+    button.getMembers().at(1).setStrokeStyle(new StrokeStyle({ stroke: 'black' }));
+  });
+
+  button.onMouse.click(() => {
+    const symbol = button.getMembers().at(1).getContent();
+
+    switch (symbol) {
+      case '=':
+        left.splice(0, left.length);
+        right.splice(0, right.length);
+        side = false;
+        result = 0;
+        break;
+
+      case '+':
+        result = Number(left.join()) + Number(right.join());
+        side = !side;
+        break;
+
+      case '-':
+        result = Number(left.join()) - Number(right.join());
+        side = !side;
+        break;
+
+      case '*':
+        result = Number(left.join()) * Number(right.join());
+        side = !side;
+        break;
+
+      case '/':
+        result = Number(left.join()) / Number(right.join());
+        side = !side;
+        break;
+
+      default:
+        if (side) {
+          left.push(symbol);
+        } else {
+          right.push(symbol);
+        }
+        break;
+    }
+
+    display.setContent(display);
+    console.log(left, right);
+  });
+
+  return button;
 }
 
-const symbols = [];
+const symbols = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '+', '='];
 
-for (let index = 1; index < 2; index++) {
-  const row = Math.floor((index - 1) / 3);
-  const col = (index - 1) % 3;
+const gridSize = 4;
+const buttons = [];
 
-  const button = Group.from(
-    Text.from('+', 215 + 40 * col, 35 + 40 * row),
-    Rectangle.from(200 + 40 * col, 15 + 40 * row, 35, 35, 5, 5)
-      .setStrokeStyle(new StrokeStyle({ strokeWidth: 2 }))
-      .setFillStyle(new FillStyle({ fillOpacity: 0 }))
-      .onMouse.click(() => {
-        equation.push(index);
-        display.setContent(equation.join(''));
-      })
-  );
+for (let i = 0; i < gridSize; i++) {
+  for (let j = 0; j < gridSize; j++) {
+    const index = i * gridSize + j;
+    const x = j * SIZE;
+    const y = i * SIZE;
 
-  symbols.push(button);
+    if (index < symbols.length) {
+      buttons.push(buttonBuilder(x, y, symbols[index]));
+    }
+  }
 }
 
 Canvas.from(svg)
-  .nest(display, ...digits, ...symbols);
+  .nest(...buttons, display);

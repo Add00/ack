@@ -6,7 +6,7 @@ describe('Rect', () => {
 
   beforeEach(() => {
     // Create a new Rectangle object before each test.
-    Rectangle = new Rect(0, 0, 100, 100);
+    rect = new Rectangle(0, 0, 100, 100);
   });
 
   it('should have the corRectangleinitial values', () => {
@@ -43,7 +43,7 @@ describe('Rect', () => {
   });
 
   it('should correctly clone a Rectangle object', () => {
-    const clonedRectangle= rect.clone();
+    const clonedRect = rect.clone();
 
     // Ensure the cloned object has the same properties.
     expect(clonedRect.getX()).toBe(rect.getX());
@@ -58,9 +58,9 @@ describe('Rect', () => {
   });
 
   it('should detect collisions correctly', () => {
-    const rect1 = new Rect(0, 0, 100, 100);
-    const rect2 = new Rect(50, 50, 100, 100);
-    const rect3 = new Rect(200, 200, 50, 50);
+    const rect1 = new Rectangle(0, 0, 100, 100);
+    const rect2 = new Rectangle(50, 50, 100, 100);
+    const rect3 = new Rectangle(200, 200, 50, 50);
 
     expect(rect1.isColliding(rect2)).toBe(true);
     expect(rect1.isColliding(rect3)).toBe(false);
