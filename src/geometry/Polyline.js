@@ -60,7 +60,7 @@ export class Polyline extends Poly {
    * @returns {Polyline} A new Polyline object with the same properties as the original.
    */
   clone () {
-    return new Polyline();
+    return new Polyline(...super.getPoints());
   }
 
   /**

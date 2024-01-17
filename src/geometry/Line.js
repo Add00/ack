@@ -58,7 +58,7 @@ export class Line extends Geometry {
    * @returns {number} The x-coordinate of the starting point.
    */
   getX1 () {
-    return super._get('x1');
+    return super._getAsNumber('x1');
   }
 
   /**
@@ -79,7 +79,7 @@ export class Line extends Geometry {
    * @returns {number} The y-coordinate of the starting point.
    */
   getY1 () {
-    return super._get('y1');
+    return super._getAsNumber('y1');
   }
 
   /**

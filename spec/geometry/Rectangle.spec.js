@@ -1,68 +1,70 @@
 /* global describe, it , expect, beforeEach */
 import { Rectangle } from '../../import/geometry.js';
+import { Vector2 } from '../../import/containers.js';
 
-describe('Rect', () => {
-  let rect;
+describe('Rectangle', () => {
+  let rectangle;
 
   beforeEach(() => {
-    // Create a new Rectangle object before each test.
-    rect = new Rectangle(0, 0, 100, 100);
+    rectangle = new Rectangle(0, 0, 10, 20, 2, 3);
   });
 
-  it('should have the corRectangleinitial values', () => {
-    expect(rect.getX()).toBe(0);
-    expect(rect.getY()).toBe(0);
-    expect(rect.getWidth()).toBe(100);
-    expect(rect.getHeight()).toBe(100);
-    expect(rect.getCornerRadiusX()).toBe(0);
-    expect(rect.getCornerRadiusY()).toBe(0);
+  it('should be instantiated correctly', () => {
+    expect(rectangle instanceof Rectangle).toBe(true);
+    expect(rectangle.getX()).toBe(0);
+    expect(rectangle.getY()).toBe(0);
+    expect(rectangle.getWidth()).toBe(10);
+    expect(rectangle.getHeight()).toBe(20);
+    expect(rectangle.getCornerRadiusX()).toBe(2);
+    expect(rectangle.getCornerRadiusY()).toBe(3);
   });
 
-  it('should set and get X and Y values', () => {
-    rect.setX(50);
-    rect.setY(75);
-
-    expect(rect.getX()).toBe(50);
-    expect(rect.getY()).toBe(75);
+  it('should set and get x-axis corner radius correctly', () => {
+    rectangle.setCornerRadiusX(5);
+    expect(rectangle.getCornerRadiusX()).toBe(5);
   });
 
-  it('should set and get width and height', () => {
-    rect.setWidth(150);
-    rect.setHeight(200);
-
-    expect(rect.getWidth()).toBe(150);
-    expect(rect.getHeight()).toBe(200);
+  it('should set and get y-axis corner radius correctly', () => {
+    rectangle.setCornerRadiusY(8);
+    expect(rectangle.getCornerRadiusY()).toBe(8);
   });
 
-  it('should set and get corner radius values', () => {
-    rect.setCornerRadiusX(10);
-    rect.setCornerRadiusY(20);
-
-    expect(rect.getCornerRadiusX()).toBe(10);
-    expect(rect.getCornerRadiusY()).toBe(20);
+  it('should set and get both x-axis and y-axis corner radii correctly', () => {
+    rectangle.setCornerRadiusX(5);
+    rectangle.setCornerRadiusY(8);
+    expect(rectangle.getCornerRadiusX()).toBe(5);
+    expect(rectangle.getCornerRadiusY()).toBe(8);
   });
 
-  it('should correctly clone a Rectangle object', () => {
-    const clonedRect = rect.clone();
-
-    // Ensure the cloned object has the same properties.
-    expect(clonedRect.getX()).toBe(rect.getX());
-    expect(clonedRect.getY()).toBe(rect.getY());
-    expect(clonedRect.getWidth()).toBe(rect.getWidth());
-    expect(clonedRect.getHeight()).toBe(rect.getHeight());
-    expect(clonedRect.getCornerRadiusX()).toBe(rect.getCornerRadiusX());
-    expect(clonedRect.getCornerRadiusY()).toBe(rect.getCornerRadiusY());
-
-    // Ensure the cloned object is not the same reference as the original.
-    expect(clonedRect).not.toBe(rect);
+  it('should set and get size using Vector2 correctly', () => {
+    const size = new Vector2(15, 25);
+    rectangle.setSize(size);
+    expect(rectangle.getWidth()).toBe(15);
+    expect(rectangle.getHeight()).toBe(25);
   });
 
-  it('should detect collisions correctly', () => {
-    const rect1 = new Rectangle(0, 0, 100, 100);
-    const rect2 = new Rectangle(50, 50, 100, 100);
-    const rect3 = new Rectangle(200, 200, 50, 50);
+  it('should set and get position using Vector2 correctly', () => {
+    const position = new Vector2(5, 10);
+    rectangle.setPosition(position);
+    expect(rectangle.getX()).toBe(5);
+    expect(rectangle.getY()).toBe(10);
+  });
 
-    expect(rect1.isColliding(rect2)).toBe(true);
-    expect(rect1.isColliding(rect3)).toBe(false);
+  it('should clone the rectangle correctly', () => {
+    const clonedRectangle = rectangle.clone();
+    expect(clonedRectangle.getX()).toBe(0);
+    expect(clonedRectangle.getY()).toBe(0);
+    expect(clonedRectangle.getWidth()).toBe(10);
+    expect(clonedRectangle.getHeight()).toBe(20);
+    expect(clonedRectangle.getCornerRadiusX()).toBe(2);
+    expect(clonedRectangle.getCornerRadiusY()).toBe(3);
+  });
+
+  it('should check collision with another rectangle correctly', () => {
+    const overlappingRectangle = new Rectangle(5, 10, 15, 25, 1, 2);
+    const nonOverlappingRectangle = new Rectangle(15, 30, 10, 15, 1, 2);
+
+    expect(rectangle.isColliding(overlappingRectangle)).toBe(true);
+    expect(rectangle.isColliding(nonOverlappingRectangle)).toBe(false);
   });
 });

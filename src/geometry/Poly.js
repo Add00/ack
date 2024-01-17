@@ -52,7 +52,7 @@ export class Poly extends Geometry {
    */
   getPoints () {
     const pointsString = this.#getPointsAsString();
-    if (!pointsString.trim()) return [];
+    if (pointsString === null || pointsString.trim() === '') return [];
 
     const pairs = pointsString.split(' ');
     const points = pairs.map(pair => {
@@ -120,9 +120,14 @@ export class Poly extends Geometry {
   removePointAt (index) {
     const points = this.getPoints();
 
+    if (index < 0 || index >= points.length) {
+      return undefined;
+    }
+
+    const removedPoint = points.splice(index, 1)[0];
     this.#setPointsAsString(points);
 
-    return points.slice(index, 1);
+    return removedPoint;
   }
 
   /**

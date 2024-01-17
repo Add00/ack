@@ -31,8 +31,8 @@ function formatNumbers (numbers) {
 export class Path extends Geometry {
   // Static
 
-  static from (relative = false) {
-    return new Path(relative);
+  static from (relative = false, startingCommands = '') {
+    return new Path(relative, startingCommands);
   }
 
   // Member
@@ -149,26 +149,24 @@ export class Path extends Geometry {
    * Adds a horizontal line to the path from the current point.
    *
    * @param {number} x - The x-coordinate of the end point of the horizontal line.
-   * @param {number} y - The y-coordinate of the end point of the horizontal line.
    * @returns {Path} The current instance.
    */
-  horizontalLineTo (x, y) {
+  horizontalLineTo (x) {
     const cmd = this.#relative ? 'h' : 'H';
 
-    return this.#appendCommand(cmd, x, y);
+    return this.#appendCommand(cmd, x, null);
   }
 
   /**
    * Adds a vertical line to the path from the current point.
    *
-   * @param {number} x - The x-coordinate of the end point of the vertical line.
    * @param {number} y - The y-coordinate of the end point of the vertical line.
    * @returns {Path} The current instance.
    */
-  verticalLineTo (x, y) {
+  verticalLineTo (y) {
     const cmd = this.#relative ? 'l' : 'L';
 
-    return this.#appendCommand(cmd, x, y);
+    return this.#appendCommand(cmd, y, null);
   }
 
   /**
@@ -267,6 +265,8 @@ export class Path extends Geometry {
 
     return this.#appendCommand(cmd, 0, 0);
   }
+
+  // Methods
 
   /**
    * Creates a clone of the current Path object.
