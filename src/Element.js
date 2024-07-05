@@ -117,7 +117,7 @@ export class Element {
 
     // Generate and set 'id' attribute
     if (!this.#element.hasAttribute('id')) {
-      const id = Element.#idGenerator.next(element.tagName).value;
+      const id = Element.#idGenerator.next(this.#element.tagName).value;
 
       this.#element.setAttribute('id', id);
     }
