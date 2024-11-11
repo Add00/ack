@@ -16,16 +16,19 @@
     "test-cli": "jasmine spec/Image.spec.js",
     "lint": "semistandard --env jasmine",
     "document": "jsdoc -r -d docs/ src",
-    "format": "semistandard --fix"
+    "format": "semistandard --fix",
+    "types": "npx -p typescript tsc src/**/*.js --declaration --allowJs --emitDeclarationOnly --outDir types"
   },
+  "types": "./types.d.ts",
   "keywords": [],
   "author": "Add00",
   "license": "MPL-2.0",
   "devDependencies": {
     "jasmine-browser-runner": "^2.3.0",
     "jasmine-core": "^5.1.1",
-    "jsdoc": "^4.0.2",
+    "jsdoc": "^4.0.3",
     "nyc": "^15.1.0",
-    "semistandard": "^17.0.0"
+    "semistandard": "^17.0.0",
+    "typescript": "^5.6.3"
   }
 }

@@ -1,3 +1,5 @@
+/** @namespace gradient */
+
 import { Element } from '../Element.js';
 
 /**
@@ -10,6 +12,7 @@ export class Stop extends Element {
   /**
    * Creates a new Stop element.
    *
+   * @constructor Stop
    * @param {number} - How far along the gradient the stop should be positioned.
    * @param {string} - The color of the gradient at this stop.
    * @param {number} - The opacity of the stop.

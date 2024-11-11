@@ -4,6 +4,8 @@ import { Adapter } from './Adapter.js';
 
 /**
  * Represents a stack data structure, which follows the Last-In, First-Out (LIFO) principle.
+ *
+ * @class
  * @extends Adapter
  */
 export class Stack extends Adapter {
@@ -16,6 +18,8 @@ export class Stack extends Adapter {
 
   /**
    * Creates a new Stack instance.
+   *
+   * @constructor Stack
    * @param {...any} items - Optional items to initialize the Stack with.
    */
   constructor (...items) {
@@ -85,10 +89,6 @@ export class Stack extends Adapter {
     };
   }
 
-  /**
-   * Symbol.iterator method to support iterable behavior.
-   * @returns {Iterator} The `forwards()` iterator.
-   */
   [Symbol.iterator] () {
     return this.forwards();
   }

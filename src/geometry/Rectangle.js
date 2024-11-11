@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Quadrilateral } from './Quadrilateral.js';
 import { Vector2 } from '../containers/vector/Vector2.js';
 
@@ -68,6 +70,7 @@ export class Rectangle extends Quadrilateral {
   /**
    * Create a new Rectangle.
    *
+   * @constructor Rectangle
    * @param {number} x - The x-coordinate of the top-left corner.
    * @param {number} y - The y-coordinate of the top-left corner.
    * @param {number} width - The width of the rectangle.

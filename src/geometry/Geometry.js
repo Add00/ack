@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Graphic } from '../Graphic.js';
 import { FillStyle } from '../styles/FillStyle.js';
 import { StrokeStyle } from '../styles/StrokeStyle.js';

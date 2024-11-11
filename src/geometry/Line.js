@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Geometry } from './Geometry.js';
 
 /**
@@ -24,6 +26,7 @@ export class Line extends Geometry {
   /**
    * Create a Line instance.
    *
+   * @constructor Line
    * @param {number} x1 - The x-coordinate of the starting point.
    * @param {number} y1 - The y-coordinate of the starting point.
    * @param {number} x2 - The x-coordinate of the ending point.
@@ -139,7 +142,7 @@ export class Line extends Geometry {
   /**
    * Check if this Line is colliding with another Line.
    *
-   * @todo
+   * @todo complete function.
    * @param {Line} other - The other Line instance to check for collision.
    * @returns {boolean} `true` if the circles are colliding, `false` otherwise.
    */

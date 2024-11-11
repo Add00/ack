@@ -30,6 +30,7 @@ function * defaultIDGenerator () {
 
 /**
  * Wrapper class for an SVG Element.
+ *
  * Provides access to the underlying features of the Element.
  */
 export class Element {
@@ -108,6 +109,7 @@ export class Element {
   /**
    * Creates a new Element instance.
    *
+   * @constructor Element
    * @param {string|SVGElement} element - The underlying SVG element to make.
    */
   constructor (element) {
@@ -321,6 +323,21 @@ export class Element {
    */
   clone () {
     return new Element(document.createElementNS('http://www.w3.org/2000/svg', this.Shape().tagName));
+  }
+
+  export (name) {
+    const serializer = new XMLSerializer();
+    const string = serializer.serializeToString(this.Shape().node());
+    const blob = new Blob([string], { type: 'image/svg+xml;charset=utf-8' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${name}.svg`;
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
   }
 
   /**

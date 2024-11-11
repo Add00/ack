@@ -37,6 +37,7 @@ export class Image extends Quadrilateral {
   /**
    * Creates a new Image object.
    *
+   * @constructor Image
    * @param {number} x - The x-coordinate of the image.
    * @param {number} y - The y-coordinate of the image.
    * @param {number} width - The width of the image.

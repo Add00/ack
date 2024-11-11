@@ -4,6 +4,7 @@ import { Vector2 } from './Vector2.js';
 
 /**
  * Represents a 3D vector with x, y, and z components.
+ *
  * @extends Vector2
  */
 export class Vector3 extends Vector2 {
@@ -12,6 +13,7 @@ export class Vector3 extends Vector2 {
   /**
    * Creates a new Vector3 instance.
    *
+   * @constructor Vector2
    * @param {number} [x=0] - The x-component of the vector.
    * @param {number} [y=0] - The y-component of the vector.
    * @param {number} [z=0] - The z-component of the vector.
@@ -225,11 +227,8 @@ export class Vector3 extends Vector2 {
     }
   }
 
-  /**
-   * Allows iteration over the components (x, y, and z) of the vector.
-   *
-   * @returns {Iterator<number>} An iterator for the components of the vector.
-   */
+  // Iterator
+
   [Symbol.iterator] () {
     const parentIterator = super[Symbol.iterator]();
     const z = this.#z;

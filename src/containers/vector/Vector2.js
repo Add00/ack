@@ -2,6 +2,7 @@
 
 /**
  * Represents a 2D vector with x and y components.
+ *
  */
 export class Vector2 {
   #x;
@@ -10,6 +11,7 @@ export class Vector2 {
   /**
    * Creates a new Vector2 instance.
    *
+   * @constructor Vector2
    * @param {number} [x=0] - The x-component of the vector.
    * @param {number} [y=0] - The y-component of the vector.
    */
@@ -129,7 +131,7 @@ export class Vector2 {
    * @returns {number} The distance between this vector and the other vector.
    */
   distance (other) {
-    return Math.sqrt((this.#x - other.#x) * (this.#x - other.#x) + (this.#y - other.#y) * (this.#y - other.#y));
+    return Math.sqrt((this.#x - other.getX()) * (this.#x - other.getX()) + (this.#y - other.getY()) * (this.#y - other.getY()));
   }
 
   /**
@@ -139,12 +141,12 @@ export class Vector2 {
    * @returns {number} The dot product of the two vectors.
    */
   dot (other) {
-    return this.#x * other.#x + this.#y * other.#y;
+    return this.#x * other.getX() + this.#y * other.getY();
   }
 
   add (other) {
-    this.#x += other.#x;
-    this.#y += other.#y;
+    this.#x += other.getX();
+    this.#y += other.getY();
 
     return this;
   }
@@ -157,8 +159,8 @@ export class Vector2 {
   }
 
   subtract (other) {
-    this.#x -= other.#x;
-    this.#y -= other.#y;
+    this.#x -= other.getX();
+    this.#y -= other.getY();
 
     return this;
   }
@@ -171,8 +173,8 @@ export class Vector2 {
   }
 
   multiply (other) {
-    this.#x *= other.#x;
-    this.#y *= other.#y;
+    this.#x *= other.getX();
+    this.#y *= other.getY();
 
     return this;
   }
@@ -185,9 +187,9 @@ export class Vector2 {
   }
 
   divide (other) {
-    if (other.#x !== 0 && other.#y !== 0) {
-      this.#x /= other.#x;
-      this.#y /= other.#y;
+    if (other.getX() !== 0 && other.getY() !== 0) {
+      this.#x /= other.getX();
+      this.#y /= other.getY();
     }
 
     return this;
@@ -237,11 +239,6 @@ export class Vector2 {
 
   // Iterator
 
-  /**
-   * Allows iteration over the components (x and y) of the vector.
-   *
-   * @returns {Iterator<number>} An iterator for the components of the vector.
-   */
   [Symbol.iterator] () {
     let index = 0;
     const elements = [this.#x, this.#y];

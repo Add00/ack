@@ -32,9 +32,6 @@ export class Adapter {
     throw new Error('unimplemented');
   }
 
-  /**
-   * @abstract
-   */
   [Symbol.iterator] () {
     throw new Error('unimplemented');
   }

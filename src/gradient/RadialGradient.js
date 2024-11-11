@@ -1,9 +1,12 @@
+/** @namespace gradient */
+
 import { Gradient } from './Gradient.js';
 
 export class RadialGradient extends Gradient {
   /**
    * Creates a new RadialGradient element.
    *
+   * @constructor RadialGradient
    * @param {number} [x=0.5] - The x-coordinate of the gradient's center.
    * @param {number} [y=0.5] - The y-coordinate of the gradient's center.
    * @param {number} [r=0.5] - The radius of the gradient.

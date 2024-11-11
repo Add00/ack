@@ -1,15 +1,19 @@
+/** @namespace style */
+
 import { Style } from './Style.js';
 
 /**
- * Represents a stroke style configuration for SVG shapes.
- * @class
+ * Represents a style for strokes in graphics.
+ *
+ * @extends Style
  */
 export class StrokeStyle extends Style {
   /**
      * Create a new StrokeStyle instance.
-     * @constructor
+     *
+     * @constructor StrokeStyle
      * @param {object} [options={}] - The stroke style options.
-     * @param {color} [options.stroke='black'] - The stroke color.
+     * @param {string} [options.stroke='black'] - The stroke color.
      * @param {number} [options.strokeWidth=1] - The stroke width.
      * @param {number} [options.strokeOpacity=1] - The stroke opacity.
      * @param {'butt' | 'square' | 'round'} [options.strokeLinecap='butt'] - The stroke linecap style ('butt', 'square', or 'round').

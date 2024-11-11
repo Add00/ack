@@ -1,5 +1,13 @@
+/** @namespace geometry */
+
 import { Geometry } from './Geometry.js';
 
+/**
+ * An inheritable class.
+ *
+ * @class
+ * @extends {Geometry}
+ */
 export class Quadrilateral extends Geometry {
   /**
    * Set the x-coordinate of the top-left corner.

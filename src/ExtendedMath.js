@@ -1,3 +1,8 @@
+/**
+ * Represents a mathematical utility class.
+ *
+ * @class
+ */
 export class ExtendedMath {
   // Constants
 

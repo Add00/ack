@@ -15,7 +15,8 @@ export class Canvas extends Quadrilateral {
    * @param {number} y - The y-coordinate of the canvas.
    * @param {number} width - The width of the canvas.
    * @param {number} height - The height of the canvas.
-   * @param {Array<number>} viewBox - The initial viewBox of the canvas.
+   * @param {number[]} [viewBox=[x, y, width, height]] - The initial viewBox of the canvas.
+   * @returns {Canvas} The new Canvas instance.
    */
   static from (x, y, width, height, viewBox = [x, y, width, height]) {
     return new Canvas(x, y, width, height, viewBox);
@@ -25,12 +26,23 @@ export class Canvas extends Quadrilateral {
    * Creates a new Canvas instance from an object.
    *
    * @param {object} svg - An object containing x, y, width, height, and viewBox properties.
+   * @param {number} svg.x - The x-coordinate of the canvas.
+   * @param {number} svg.y - The y-coordinate of the canvas.
+   * @param {number} svg.width - The width of the canvas.
+   * @param {number} svg.height - The height of the canvas.
+   * @param {number[]} [svg.viewBox=[x, y, width, height]] - The initial viewBox of the canvas.
    * @returns {Canvas} The new Canvas instance.
    */
   static parse ({ x, y, width, height, viewBox = [x, y, width, height] }) {
     return new Canvas(x, y, width, height, viewBox);
   }
 
+  /**
+   * Wraps an existing SVG element into a Canvas instance.
+   *
+   * @param {SVGElement} svg - The SVG element to wrap.
+   * @returns {Canvas} The new Canvas instance.
+   */
   static wrap (svg) {
     return new Canvas(svg);
   }
@@ -59,11 +71,12 @@ export class Canvas extends Quadrilateral {
   /**
    * Creates a new Canvas instance.
    *
+   * @constructor Canvas
    * @param {number} x - The x-coordinate of the canvas.
    * @param {number} y - The y-coordinate of the canvas.
    * @param {number} width - The width of the canvas.
    * @param {number} height - The height of the canvas.
-   * @param {Array<number>} [viewBox=[x, y, width, height]] - The initial viewBox of the canvas. Default is [x, y, width, height].
+   * @param {number[]} [viewBox=[x, y, width, height]] - The initial viewBox of the canvas.
    */
   constructor (x, y, width, height, viewBox = [x, y, width, height]) {
     if (typeof x === 'number') {

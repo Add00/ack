@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Poly } from './Poly.js';
 
 /**
@@ -20,6 +22,7 @@ export class Polygon extends Poly {
   /**
    * Create a Polygon instance.
    *
+   * @constructor Polygon
    * @param {...DOMPoint} points - The DOMPoints to add to the polygon.
    */
   constructor (...points) {
@@ -44,7 +47,7 @@ export class Polygon extends Poly {
   /**
    * Check if this Polygon is colliding with another Polygon.
    *
-   * @todo
+   * @todo complete function.
    * @param {Polygon} other - The other Polygon instance to check for collision.
    * @returns {boolean} `true` if the Polygons are colliding, `false` otherwise.
    */

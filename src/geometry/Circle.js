@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Conic } from './Conic.js';
 
 /**
@@ -49,6 +51,7 @@ export class Circle extends Conic {
   /**
    * Create a Circle instance.
    *
+   * @constructor Circle
    * @param {number} x - The x-coordinate of the center of the circle.
    * @param {number} y - The y-coordinate of the center of the circle.
    * @param {number} r - The radius of the circle.

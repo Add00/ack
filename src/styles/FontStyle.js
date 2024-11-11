@@ -1,3 +1,5 @@
+/** @namespace style */
+
 import { Style } from './Style.js';
 
 /**
@@ -9,6 +11,7 @@ export class FontStyle extends Style {
   /**
    * Create a new FontStyle instance with the specified font properties.
    *
+   * @constructor FontStyle
    * @param {Object} options - The options for configuring the font style.
    * @param {string} [options.fontFamily='Arial'] - The font family for the text.
    * @param {string} [options.fontStyle='normal'] - The font style (e.g., 'normal', 'italic', 'oblique').

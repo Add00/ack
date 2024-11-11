@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Poly } from './Poly.js';
 
 /**
@@ -20,6 +22,7 @@ export class Polyline extends Poly {
   /**
    * Create a Polyline instance.
    *
+   * @constructor Polyline
    * @param {...DOMPoint} points - The DOMPoints to add to the Polyline.
    */
   constructor (...points) {
@@ -66,7 +69,7 @@ export class Polyline extends Poly {
   /**
    * Check if this Polyline is colliding with another Polyline.
    *
-   * @todo
+   * @todo complete function.
    * @param {Polyline} other - The other Polyline instance to check for collision.
    * @returns {boolean} `true` if the Polylines are colliding, `false` otherwise.
    */

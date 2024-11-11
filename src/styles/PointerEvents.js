@@ -6,6 +6,8 @@
 export class PointerEvents {
   /**
    * Creates a new PointerEvents instance with the specified value.
+   *
+   * @constructor PointerEvents
    * @param {string} value - The 'pointer-events' property value.
    */
   constructor (value) {

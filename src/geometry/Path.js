@@ -1,8 +1,11 @@
+/** @namespace geometry */
+
 import { Geometry } from './Geometry.js';
 
 /**
  * Formats an array of numbers into a string with pairs separated by commas.
  *
+ * @private
  * @param {number[]} numbers - An array of numbers to format.
  * @returns {string} The formatted string.
  */
@@ -56,6 +59,13 @@ export class Path extends Geometry {
     return this;
   }
 
+  /**
+   * Creates an instance of the class.
+   *
+   * @constructor
+   * @param {boolean} [relative=false] - Indicates whether the commands are relative.
+   * @param {string} [startingCommands=''] - The initial commands for the SVG path.
+   */
   constructor (relative = false, startingCommands = '') {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
 

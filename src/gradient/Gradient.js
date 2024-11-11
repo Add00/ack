@@ -1,7 +1,10 @@
+/** @namespace gradient */
+
 import { Element } from '../Element.js';
 
 /**
  * Represents a gradient element for SVG elements.
+ *
  * @extends Element
  */
 export class Gradient extends Element {
@@ -37,8 +40,9 @@ export class Gradient extends Element {
 
   /**
    * Sets the spread method for a gradient.
+   *
    * @param {'pad' | 'reflect' | 'repeat'} method the new method that will be used.
-   * @returns the current instance.
+   * @returns {Gradient} the current instance.
    */
   setSpreadMethod (method) {
     super._set('spreadMethod', method);
@@ -46,6 +50,11 @@ export class Gradient extends Element {
     return this;
   }
 
+  /**
+   * Get s the spread method for the gradient.
+   *
+   * @returns {'pad' | 'reflect' | 'repeat'} the current spread method.
+   */
   getSpreadMethod () {
     return super._getAsString('spreadMethod');
   }

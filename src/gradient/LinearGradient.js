@@ -1,12 +1,17 @@
+/** @namespace gradient */
+
 import { Gradient } from './Gradient.js';
 
 /**
  * Represents a linear gradient for SVG elements.
+ *
  * @extends Gradient
  */
 export class LinearGradient extends Gradient {
   /**
    * Create a new LinearGradient instance.
+   *
+   * @constructor LinearGradient
    * @param {number} x1 Set the x coordinate of the starting point of the gradient.
    * @param {number} y1 Set the y coordinate of the starting point of the gradient.
    * @param {number} x2 Set the x coordinate of the ending point of the gradient.

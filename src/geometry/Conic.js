@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Geometry } from './Geometry.js';
 
 /**

@@ -1,3 +1,5 @@
+/** @namespace style */
+
 import { Style } from './Style.js';
 
 export class FillStyle extends Style {

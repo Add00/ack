@@ -1,9 +1,12 @@
+/** @namespace geometry */
+
 /* global DOMPoint */
 import { Geometry } from './Geometry.js';
 
 /**
  * An inheritable class.
  *
+ * @class
  * @extends {Geometry}
  */
 export class Poly extends Geometry {

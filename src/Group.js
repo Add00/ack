@@ -28,10 +28,15 @@ export class Group extends Geometry {
     return Group.group(...elements);
   }
 
+  /**
+   * @type {Geometry[]}
+   */
   #members;
 
   /**
    * Creates a new Group instance.
+   *
+   * @constructor Group
    */
   constructor () {
     super(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
@@ -53,6 +58,11 @@ export class Group extends Geometry {
     return this;
   }
 
+  /**
+   * Get all of the members of the group.
+   *
+   * @returns {Geometry[]} - An array of members.
+   */
   getMembers () {
     return this.#members;
   }
@@ -75,24 +85,10 @@ export class Group extends Geometry {
 
   // Iterators
 
-  /**
-   * Forwards iterator for iterating through the members of the group.
-   *
-   * @returns {Iterator} An iterator for the members of the group.
-   */
-  [Symbol.iterator] () {
+  * [Symbol.iterator] () {
     let index = 0;
-
-    return {
-      // Note: using an arrow function allows `this` to point to the
-      // one of `[@@iterator]()` instead of `next()`
-      next: () => {
-        if (index < this.#members.length) {
-          return { value: this.#members[index++], done: false };
-        } else {
-          return { done: true };
-        }
-      }
-    };
+    while (index < this.#members.length) {
+      yield this.#members[index++];
+    }
   }
 }

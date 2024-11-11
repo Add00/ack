@@ -4,6 +4,8 @@ import { Adapter } from './Adapter.js';
 
 /**
  * Represents a queue data structure, which follows the First-In, First-Out (FIFO) principle.
+ *
+ * @class
  * @extends Adapter
  */
 export class Queue extends Adapter {
@@ -16,6 +18,8 @@ export class Queue extends Adapter {
 
   /**
    * Creates a new Queue instance.
+   *
+   * @constructor Queue
    * @param {...any} items - Optional items to initialize the Queue with.
    */
   constructor (...items) {
@@ -85,10 +89,6 @@ export class Queue extends Adapter {
     };
   }
 
-  /**
-   * Symbol.iterator method to support iterable behavior.
-   * @returns {Iterator} The `forwards()` iterator.
-   */
   [Symbol.iterator] () {
     return this.forwards();
   }

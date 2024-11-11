@@ -1,3 +1,5 @@
+/** @namespace geometry */
+
 import { Conic } from './Conic.js';
 import { Vector2 } from '../containers/vector/Vector2.js';
 
@@ -40,6 +42,7 @@ export class Ellipse extends Conic {
   /**
    * Create an Ellipse object.
    *
+   * @constructor Ellipse
    * @param {number} x - The x-coordinate of the center of the ellipse.
    * @param {number} y - The y-coordinate of the center of the ellipse.
    * @param {number} rx - The horizontal radius of the ellipse.

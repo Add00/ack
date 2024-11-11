@@ -18,8 +18,8 @@ export class Graphic extends Element {
    * @param {boolean} [clipped=false] - Whether to include clipped content when calculating the bounding box.
    * @returns {DOMRect} - The bounding box of the graphic.
    */
-  getBoundingBox ({ fill = true, stroke = false, markers = false, clipped = false }) {
-    super.Shape().getBBox({ fill, stroke, markers, clipped });
+  getBoundingBox ({ fill = true, stroke = false, markers = false, clipped = false } = {}) {
+    return super.Shape().getBBox({ fill, stroke, markers, clipped });
   }
 
   /**
@@ -43,10 +43,9 @@ export class Graphic extends Element {
   /**
    * Retrieves the current screen transformation matrix (CTM) of the graphic.
    *
-   * @alias getScreenCTM()
    * @returns {DOMMatrix} - The current screen CTM of the graphic.
    */
   getClientCTM () {
-    return this.getScreenCTM();
+    return this.Shape().getScreenCTM();
   }
 }
